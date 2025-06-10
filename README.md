@@ -14,6 +14,11 @@ More Info:
 
 This firmware is based on a datasheet for a chip that was not used for pcie devices but in industrial motherboards and I/O devices that required an ISA Bridge. Datasheet has been provided.
 
+The I/O Bar is unneccessary and I only implemented because the datasheet shows in the command register than the I/O bar should be enabled.
+
+Both the Caps & Extended Caps I implemented from scratch as the datasheet does not have that information included; If you create firmware from this device without the capabilities included it will fail the driver scan with a capability error as well as 
+fail to initialize the linking speed/width. 
+
 ![Driver scan before manually setting command register](image.png)
 
 ![Driver scan after manually setting command register](2.png)
