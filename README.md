@@ -16,6 +16,6 @@ This firmware is based on a datasheet for a chip that was not used for pcie devi
 
 ![Driver scan before manually setting command register](image.png)
 
-[Driver scan after manually setting command register](Pcileech-ISABridge-PC8/blob/main/2.png)
+![Driver scan after manually setting command register](2.png)
 
-[Speed Test](Pcileech-ISABridge-PC8/blob/main/Screenshot%202025-06-10%20160117.png)
+![Speed Test](Screenshot%202025-06-10%20160117.png)
