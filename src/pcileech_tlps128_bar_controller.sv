@@ -44,6 +44,7 @@ module pcileech_tlps128_bar_controller(
     input                   clk,
     input                   bar_en,
     input [15:0]            pcie_id,
+    input [31:0]            base_address_register,
     IfAXIS128.sink_lite     tlps_in,
     IfAXIS128.source        tlps_out
 );
@@ -134,7 +135,7 @@ module pcileech_tlps128_bar_controller(
                         bar_rsp_valid[6] ? bar_rsp_data[6] : 0;
     assign rd_rsp_valid = bar_rsp_valid[0] || bar_rsp_valid[1] || bar_rsp_valid[2] || bar_rsp_valid[3] || bar_rsp_valid[4] || bar_rsp_valid[5] || bar_rsp_valid[6];
     
-    pcileech_bar_impl_zerowrite4k i_bar0(
+    pcileech_bar_impl_io0 i_bar0(
         .rst            ( rst                           ),
         .clk            ( clk                           ),
         .wr_addr        ( wr_addr                       ),
@@ -144,12 +145,13 @@ module pcileech_tlps128_bar_controller(
         .rd_req_ctx     ( rd_req_ctx                    ),
         .rd_req_addr    ( rd_req_addr                   ),
         .rd_req_valid   ( rd_req_valid && rd_req_bar[0] ),
+        .base_address_register ( base_address_register[0] ),
         .rd_rsp_ctx     ( bar_rsp_ctx[0]                ),
         .rd_rsp_data    ( bar_rsp_data[0]               ),
         .rd_rsp_valid   ( bar_rsp_valid[0]              )
     );
     
-    pcileech_bar_impl_loopaddr i_bar1(
+    pcileech_bar_impl_bar1 i_bar1(
         .rst            ( rst                           ),
         .clk            ( clk                           ),
         .wr_addr        ( wr_addr                       ),
@@ -159,6 +161,7 @@ module pcileech_tlps128_bar_controller(
         .rd_req_ctx     ( rd_req_ctx                    ),
         .rd_req_addr    ( rd_req_addr                   ),
         .rd_req_valid   ( rd_req_valid && rd_req_bar[1] ),
+        .base_address_register ( base_address_register[1] ),
         .rd_rsp_ctx     ( bar_rsp_ctx[1]                ),
         .rd_rsp_data    ( bar_rsp_data[1]               ),
         .rd_rsp_valid   ( bar_rsp_valid[1]              )
@@ -174,6 +177,7 @@ module pcileech_tlps128_bar_controller(
         .rd_req_ctx     ( rd_req_ctx                    ),
         .rd_req_addr    ( rd_req_addr                   ),
         .rd_req_valid   ( rd_req_valid && rd_req_bar[2] ),
+        .base_address_register ( base_address_register[2] ),
         .rd_rsp_ctx     ( bar_rsp_ctx[2]                ),
         .rd_rsp_data    ( bar_rsp_data[2]               ),
         .rd_rsp_valid   ( bar_rsp_valid[2]              )
@@ -189,6 +193,7 @@ module pcileech_tlps128_bar_controller(
         .rd_req_ctx     ( rd_req_ctx                    ),
         .rd_req_addr    ( rd_req_addr                   ),
         .rd_req_valid   ( rd_req_valid && rd_req_bar[3] ),
+        .base_address_register ( base_address_register[3] ),
         .rd_rsp_ctx     ( bar_rsp_ctx[3]                ),
         .rd_rsp_data    ( bar_rsp_data[3]               ),
         .rd_rsp_valid   ( bar_rsp_valid[3]              )
@@ -204,24 +209,26 @@ module pcileech_tlps128_bar_controller(
         .rd_req_ctx     ( rd_req_ctx                    ),
         .rd_req_addr    ( rd_req_addr                   ),
         .rd_req_valid   ( rd_req_valid && rd_req_bar[4] ),
+        .base_address_register ( base_address_register[4] ),
         .rd_rsp_ctx     ( bar_rsp_ctx[4]                ),
         .rd_rsp_data    ( bar_rsp_data[4]               ),
         .rd_rsp_valid   ( bar_rsp_valid[4]              )
     );
     
     pcileech_bar_impl_none i_bar5(
-        .rst            ( rst                           ),
-        .clk            ( clk                           ),
-        .wr_addr        ( wr_addr                       ),
-        .wr_be          ( wr_be                         ),
-        .wr_data        ( wr_data                       ),
-        .wr_valid       ( wr_valid && wr_bar[5]         ),
-        .rd_req_ctx     ( rd_req_ctx                    ),
-        .rd_req_addr    ( rd_req_addr                   ),
-        .rd_req_valid   ( rd_req_valid && rd_req_bar[5] ),
-        .rd_rsp_ctx     ( bar_rsp_ctx[5]                ),
-        .rd_rsp_data    ( bar_rsp_data[5]               ),
-        .rd_rsp_valid   ( bar_rsp_valid[5]              )
+        .rst                   ( rst                           ),
+        .clk                   ( clk                           ),
+        .wr_addr               ( wr_addr                       ),
+        .wr_be                 ( wr_be                         ),
+        .wr_data               ( wr_data                       ),
+        .wr_valid              ( wr_valid && wr_bar[5]         ),
+        .rd_req_ctx            ( rd_req_ctx                    ),
+        .rd_req_addr           ( rd_req_addr                   ),
+        .rd_req_valid          ( rd_req_valid && rd_req_bar[5] ),
+        .base_address_register ( base_address_register[5]      ),
+        .rd_rsp_ctx            ( bar_rsp_ctx[5]                ),
+        .rd_rsp_data           ( bar_rsp_data[5]               ),
+        .rd_rsp_valid          ( bar_rsp_valid[5]              )
     );
     
     pcileech_bar_impl_none i_bar6_optrom(
@@ -687,6 +694,7 @@ module pcileech_bar_impl_none(
     input  [87:0]       rd_req_ctx,
     input  [31:0]       rd_req_addr,
     input               rd_req_valid,
+    input [31:0] base_address_register,
     // outgoing BAR read replies:
     output bit [87:0]   rd_rsp_ctx,
     output bit [31:0]   rd_rsp_data,
@@ -789,5 +797,213 @@ module pcileech_bar_impl_zerowrite4k(
         .doutb  ( doutb             ),
         .enb    ( rd_req_valid      )
     );
+
+endmodule
+
+module pcileech_bar_impl_io0(
+    input               rst,
+    input               clk,
+    // incoming BAR writes:
+    input [31:0]        wr_addr,
+    input [3:0]         wr_be,
+    input [31:0]        wr_data,
+    input               wr_valid,
+    // incoming BAR reads:
+    input  [87:0]       rd_req_ctx,
+    input  [31:0]       rd_req_addr,
+    input               rd_req_valid,
+    input  [31:0]       base_address_register,
+    // outgoing BAR read replies:
+    output bit [87:0]   rd_rsp_ctx,
+    output bit [31:0]   rd_rsp_data,
+    output bit          rd_rsp_valid
+);
+    bit [87:0]      drd_req_ctx;
+    bit [31:0]      drd_req_addr;
+    bit             drd_req_valid;
+
+    bit [31:0]      dwr_addr;
+    bit [31:0]      dwr_data;
+    bit             dwr_valid;
+
+    bit [31:0]      data_32;
+
+
+    always @ (posedge clk) begin
+        if (rst)
+          
+        drd_req_ctx     <= rd_req_ctx;
+        drd_req_valid   <= rd_req_valid;
+        dwr_valid       <= wr_valid;
+        drd_req_addr    <= rd_req_addr;
+        rd_rsp_ctx      <= drd_req_ctx;
+        rd_rsp_valid    <= drd_req_valid;
+        dwr_addr        <= wr_addr;
+        dwr_data        <= wr_data;
+
+        if (drd_req_valid) begin
+            case ({drd_req_addr[31:24], drd_req_addr[23:16], drd_req_addr[15:08], drd_req_addr[07:00]} - (base_address_register & 32'hFFFFFF00)) 
+          8'h00 : rd_rsp_data <= 32'h0021100b;
+          8'h04 : rd_rsp_data <= 32'h00100107;
+          8'h08 : rd_rsp_data <= 32'h00000010;
+          8'h0C : rd_rsp_data <= 32'h00000010;
+          8'h10 : rd_rsp_data <= 32'h00000000;
+          8'h14 : rd_rsp_data <= 32'h00000000;
+          8'h18 : rd_rsp_data <= 32'h00000000;
+          8'h1C : rd_rsp_data <= 32'h00000000;
+          8'h20 : rd_rsp_data <= 32'h00000000;
+          8'h24 : rd_rsp_data <= 32'h00000000;
+          8'h28 : rd_rsp_data <= 32'h00000000;
+          8'h2C : rd_rsp_data <= 32'h00000000;
+          8'h30 : rd_rsp_data <= 32'h00000000;
+          8'h34 : rd_rsp_data <= 32'h00000000;
+          8'h38 : rd_rsp_data <= 32'h00000000;
+          8'h3C : rd_rsp_data <= 32'h00000000;
+          8'h40 : rd_rsp_data <= 32'h46281079;
+          8'h44 : rd_rsp_data <= 32'h00000000;
+          8'h48 : rd_rsp_data <= 32'h00044343;
+          8'h4C : rd_rsp_data <= 32'h00000000;
+          8'h50 : rd_rsp_data <= 32'h00000000;
+          8'h54 : rd_rsp_data <= 32'h00000000;
+          8'h58 : rd_rsp_data <= 32'h00000000;
+          8'h5C : rd_rsp_data <= 32'h00000000;
+          8'h60 : rd_rsp_data <= 32'h04800000;
+        default : rd_rsp_data <= 32'hDEADBEEF; 
+            endcase 
+            end else if (dwr_valid) begin
+             case (({dwr_addr[31:24], dwr_addr[23:16], dwr_addr[15:08], dwr_addr[07:00]} - (base_address_register & ~32'h4)) & 32'hFFFF) 
+          8'h00 : rd_rsp_data <= 32'h0021100b;
+          8'h04 : rd_rsp_data <= 32'h00100107;
+          8'h08 : rd_rsp_data <= 32'h00000010;
+          8'h0C : rd_rsp_data <= 32'h00000010;
+          8'h10 : rd_rsp_data <= 32'h00000000;
+          8'h14 : rd_rsp_data <= 32'h00000000;
+          8'h18 : rd_rsp_data <= 32'h00000000;
+          8'h1C : rd_rsp_data <= 32'h00000000;
+          8'h20 : rd_rsp_data <= 32'h00000000;
+          8'h24 : rd_rsp_data <= 32'h00000000;
+          8'h28 : rd_rsp_data <= 32'h00000000;
+          8'h2C : rd_rsp_data <= 32'h00000000;
+          8'h30 : rd_rsp_data <= 32'h00000000;
+          8'h34 : rd_rsp_data <= 32'h00000000;
+          8'h38 : rd_rsp_data <= 32'h00000000;
+          8'h3C : rd_rsp_data <= 32'h00000000;
+          8'h40 : rd_rsp_data <= 32'h46281079;
+          8'h44 : rd_rsp_data <= 32'h00000000;
+          8'h48 : rd_rsp_data <= 32'h00044343;
+          8'h4C : rd_rsp_data <= 32'h00000000;
+          8'h50 : rd_rsp_data <= 32'h00000000;
+          8'h54 : rd_rsp_data <= 32'h00000000;
+          8'h58 : rd_rsp_data <= 32'h00000000;
+          8'h5C : rd_rsp_data <= 32'h00000000;
+          8'h60 : rd_rsp_data <= 32'h04800000;
+        default : rd_rsp_data <= 32'hDEAFBEEF; 
+            endcase
+       end
+    end
+
+endmodule
+
+module pcileech_bar_impl_bar1(
+    input               rst,
+    input               clk,
+    // incoming BAR writes:
+    input [31:0]        wr_addr,
+    input [3:0]         wr_be,
+    input [31:0]        wr_data,
+    input               wr_valid,
+    // incoming BAR reads:
+    input  [87:0]       rd_req_ctx,
+    input  [31:0]       rd_req_addr,
+    input               rd_req_valid,
+    input  [31:0]       base_address_register,
+    // outgoing BAR read replies:
+    output bit [87:0]   rd_rsp_ctx,
+    output bit [31:0]   rd_rsp_data,
+    output bit          rd_rsp_valid
+);
+    bit [87:0]      drd_req_ctx;
+    bit [31:0]      drd_req_addr;
+    bit             drd_req_valid;
+
+    bit [31:0]      dwr_addr;
+    bit [31:0]      dwr_data;
+    bit             dwr_valid;
+
+    bit [31:0]      data_32;
+
+
+    always @ (posedge clk) begin
+        if (rst)
+          
+        drd_req_ctx     <= rd_req_ctx;
+        drd_req_valid   <= rd_req_valid;
+        dwr_valid       <= wr_valid;
+        drd_req_addr    <= rd_req_addr;
+        rd_rsp_ctx      <= drd_req_ctx;
+        rd_rsp_valid    <= drd_req_valid;
+        dwr_addr        <= wr_addr;
+        dwr_data        <= wr_data;
+
+        if (drd_req_valid) begin
+            case ({drd_req_addr[31:24], drd_req_addr[23:16], drd_req_addr[15:08], drd_req_addr[07:00]} - (base_address_register & 32'hFFFFFFF0))
+          8'h00 : rd_rsp_data <= 32'h0021100b;
+          8'h04 : rd_rsp_data <= 32'h00100107;
+          8'h08 : rd_rsp_data <= 32'h00000010;
+          8'h0C : rd_rsp_data <= 32'h00000010;
+          8'h10 : rd_rsp_data <= 32'h00000000;
+          8'h14 : rd_rsp_data <= 32'h00000000;
+          8'h18 : rd_rsp_data <= 32'h00000000;
+          8'h1C : rd_rsp_data <= 32'h00000000;
+          8'h20 : rd_rsp_data <= 32'h00000000;
+          8'h24 : rd_rsp_data <= 32'h00000000;
+          8'h28 : rd_rsp_data <= 32'h00000000;
+          8'h2C : rd_rsp_data <= 32'h00000000;
+          8'h30 : rd_rsp_data <= 32'h00000000;
+          8'h34 : rd_rsp_data <= 32'h00000000;
+          8'h38 : rd_rsp_data <= 32'h00000000;
+          8'h3C : rd_rsp_data <= 32'h00000000;
+          8'h40 : rd_rsp_data <= 32'h46281079;
+          8'h44 : rd_rsp_data <= 32'h00000000;
+          8'h48 : rd_rsp_data <= 32'h00044343;
+          8'h4C : rd_rsp_data <= 32'h00000000;
+          8'h50 : rd_rsp_data <= 32'h00000000;
+          8'h54 : rd_rsp_data <= 32'h00000000;
+          8'h58 : rd_rsp_data <= 32'h00000000;
+          8'h5C : rd_rsp_data <= 32'h00000000;
+          8'h60 : rd_rsp_data <= 32'h04800000;
+        default : rd_rsp_data <= 32'hDEADBEEF; 
+            endcase 
+            end else if (dwr_valid) begin
+             case ({dwr_addr[31:24], dwr_addr[23:16], dwr_addr[15:08], dwr_addr[07:00]} - (base_address_register))
+          8'h00 : rd_rsp_data <= 32'h0021100b;
+          8'h04 : rd_rsp_data <= 32'h00100107;
+          8'h08 : rd_rsp_data <= 32'h00000010;
+          8'h0C : rd_rsp_data <= 32'h00000010;
+          8'h10 : rd_rsp_data <= 32'h00000000;
+          8'h14 : rd_rsp_data <= 32'h00000000;
+          8'h18 : rd_rsp_data <= 32'h00000000;
+          8'h1C : rd_rsp_data <= 32'h00000000;
+          8'h20 : rd_rsp_data <= 32'h00000000;
+          8'h24 : rd_rsp_data <= 32'h00000000;
+          8'h28 : rd_rsp_data <= 32'h00000000;
+          8'h2C : rd_rsp_data <= 32'h00000000;
+          8'h30 : rd_rsp_data <= 32'h00000000;
+          8'h34 : rd_rsp_data <= 32'h00000000;
+          8'h38 : rd_rsp_data <= 32'h00000000;
+          8'h3C : rd_rsp_data <= 32'h00000000;
+          8'h40 : rd_rsp_data <= 32'h46281079;
+          8'h44 : rd_rsp_data <= 32'h00000000;
+          8'h48 : rd_rsp_data <= 32'h00044343;
+          8'h4C : rd_rsp_data <= 32'h00000000;
+          8'h50 : rd_rsp_data <= 32'h00000000;
+          8'h54 : rd_rsp_data <= 32'h00000000;
+          8'h58 : rd_rsp_data <= 32'h00000000;
+          8'h5C : rd_rsp_data <= 32'h00000000;
+          8'h60 : rd_rsp_data <= 32'h04800000;
+        default : rd_rsp_data <= 32'hDEAFBEEF; 
+            endcase
+       end
+    end
 
 endmodule
