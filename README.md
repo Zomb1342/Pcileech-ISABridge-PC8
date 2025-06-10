@@ -25,4 +25,4 @@ fail to initialize the linking speed/width.
 
 ![Speed Test](Screenshot%202025-06-10%20160117.png)
 
-![Datasheet](PC87200.PDF)
+[Datasheet](PC87200.PDF)
