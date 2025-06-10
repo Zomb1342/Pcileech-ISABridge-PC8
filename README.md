@@ -24,3 +24,5 @@ fail to initialize the linking speed/width.
 ![Driver scan after manually setting command register](2.png)
 
 ![Speed Test](Screenshot%202025-06-10%20160117.png)
+
+![Datasheet](PC87200.PDF)
