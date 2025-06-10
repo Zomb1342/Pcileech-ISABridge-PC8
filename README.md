@@ -1,6 +1,6 @@
 # Pcileech-ISABridge-PC8
 
-FPGA as a PCI - ISA Bridge. Has not been tested thrououghly and has been made for researching purposes only; I do know it is no beuno for VGK in its current state.
+FPGA mimicking a PCI - ISA Bridge. Has not been tested thrououghly and has been made for researching purposes only; I do know it is no beuno for VGK in its current state.
 
 Issues with firmware in its current state:
 
