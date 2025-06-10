@@ -14,7 +14,7 @@ More Info:
 
 This firmware is based on a datasheet for a chip that was not used for pcie devices but in industrial motherboards and I/O devices that required an ISA Bridge. Datasheet has been provided.
 
-[Driver scan before manually setting command register](image.png)
+![Driver scan before manually setting command register](image.png)
 
 [Driver scan after manually setting command register](Pcileech-ISABridge-PC8/blob/main/2.png)
 
