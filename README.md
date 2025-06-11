@@ -7,8 +7,7 @@ Issues with firmware in its current state:
 1.) Command Register is zero'd out when driver loads; I cannot seem to get it to set the command register. If you set the command register manually using software it will pass the driver test & it passes the speed test with flying colors. 
 If you can figure out how to fix the command register I'd happily commit it to this repo. 
 
-2.) Interrupts are not firing; I believe this is because the Command Register is not initializing to the correct value upon startup so the int_line value assigned is FF which is invalid.
-Maybe can change interrupts from Legacy to MSI to generate Interrupts but I would think if the Command Register is causing the issue then using MSI would not fix the interrupt issue.
+2.) Interrupts are not firing; I believe this is because the Command Register is not initializing to the correct value upon startup so the int_line value assigned is FF which is invalid, changing the int_line value manually has no effect. 
 
 More Info:
 
