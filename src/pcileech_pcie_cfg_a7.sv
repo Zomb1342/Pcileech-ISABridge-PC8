@@ -98,7 +98,7 @@ module pcileech_pcie_cfg_a7(
     reg                 rwi_tlp_static_has_data;
     reg     [31:0]      rwi_count_cfgspace_status_cl;
     bit     [31:0]      base_address_register_reg;
-    
+    bit     [9:0]       next_cfg_task;
    
     // ------------------------------------------------------------------------
     // REGISTER FILE: READ-ONLY LAYOUT/SPECIFICATION
@@ -203,9 +203,6 @@ module pcileech_pcie_cfg_a7(
             
             rwi_cfg_mgmt_rd_en <= 1'b0;
             rwi_cfg_mgmt_wr_en <= 1'b0;
-            for ( int i = 0; i < 5; i = i + 1) begin
-            base_address_register_reg[i] <= 32'h00000000;
-            end
     
             // MAGIC
             rw[15:0]    <= 16'h6745;                // +000:
@@ -341,35 +338,39 @@ module pcileech_pcie_cfg_a7(
     parameter STATE_IDLE = 2'd0;
     parameter STATE_ASSERT_INT = 2'd1;
     parameter STATE_DEASSERT_INT = 2'd2;
-    
+
+
+
+
     always @ ( posedge clk_pcie )
-         if ( rst ) begin
+        if ( rst )
             pcileech_pcie_cfg_a7_initialvalues();
-            tickcount64_25_prev <= 0;
-            sec_counter <= 0;
-            cfg_int_assert <= 0;
-            cfg_int_valid <= 0;
-            int_state <= STATE_IDLE;
-        end else begin
-            // READ config
-            out_wren <= in_cmd_read;
-            if ( in_cmd_read ) begin
-                out_data[31:16] <= in_cmd_address_byte;
-                out_data[15:0]  <= {in_cmd_data_in[7:0], in_cmd_data_in[15:8]};
-            end
+        else
+            begin         
+                // READ config
+                out_wren <= in_cmd_read;
+                if ( in_cmd_read )
+                    begin
+                        out_data[31:16] <= in_cmd_address_byte;
+                        out_data[15:0]  <= {in_cmd_data_in[7:0], in_cmd_data_in[15:8]};
+                    end
 
-            // WRITE config
-            if ( in_cmd_write )
-                for ( i_write = 0; i_write < 16; i_write = i_write + 1 )
-                    if ( in_cmd_mask[i_write] )
-                        rw[in_cmd_address_bit+i_write] <= in_cmd_value[i_write];
+                // WRITE config
+                if ( in_cmd_write )
+                    for ( i_write = 0; i_write < 16; i_write = i_write + 1 )
+                        begin
+                            if ( in_cmd_mask[i_write] )
+                                rw[in_cmd_address_bit+i_write] <= in_cmd_value[i_write];
+                        end
 
-                // STATUS REGISTER CLEAR
+               // STATUS REGISTER CLEAR
                 if ( (rw[RWPOS_CFG_CFGSPACE_STATUS_CL_EN] | rw[RWPOS_CFG_CFGSPACE_COMMAND_EN]) & ~in_cmd_read & ~in_cmd_write & ~rw[RWPOS_CFG_RD_EN] & ~rw[RWPOS_CFG_WR_EN] & ~rwi_cfg_mgmt_rd_en & ~rwi_cfg_mgmt_wr_en )
                     if ( rwi_count_cfgspace_status_cl < rw[672+:32] )
                         rwi_count_cfgspace_status_cl <= rwi_count_cfgspace_status_cl + 1;
                     else begin
                         rwi_count_cfgspace_status_cl <= 0;
+						 case(next_cfg_task)
+           				 0: begin
                         rw[RWPOS_CFG_WR_EN] <= 1'b1;
                         rw[143:128] <= 16'h0105;                            // cfg_mgmt_di: command register [update to set individual command register bits]
                         rw[159:144] <= 16'hff00;                            // cfg_mgmt_di: status register [do not update]
@@ -381,6 +382,61 @@ module pcileech_pcie_cfg_a7(
                         rw[174]     <= 0;                                   // cfg_mgmt_byte_en: status register
                         rw[175]     <= rw[RWPOS_CFG_CFGSPACE_STATUS_CL_EN]; // cfg_mgmt_byte_en: status register
                     end
+            1: begin  // PCI Function Control Register 1 (40h)
+                rw[RWPOS_CFG_WR_EN] <= 1'b1;
+                rw[159:128] <= 32'h00000079;  // Default 79h
+                rw[169:160] <= 10'h10;        // Address 40h
+                rw[175:172] <= 4'b0001;       // Write byte 0
+            end
+            2: begin  // PCI Function Control Register 2 (41h)
+                rw[RWPOS_CFG_WR_EN] <= 1'b1;
+                rw[159:128] <= 32'h00000010;  // Default 10h
+                rw[169:160] <= 10'h10;        // Address 40h
+                rw[175:172] <= 4'b0010;       // Write byte 1
+            end
+            3: begin  // PCI Function Control Register 3 (42h)
+                rw[RWPOS_CFG_WR_EN] <= 1'b1;
+                rw[159:128] <= 32'h00000028;  // Default 28h
+                rw[169:160] <= 10'h10;        // Address 40h
+                rw[175:172] <= 4'b0100;       // Write byte 2
+            end
+            4: begin  // PCI Function Control Register 4 (43h)
+                rw[RWPOS_CFG_WR_EN] <= 1'b1;
+                rw[159:128] <= 32'h00000046;  // Default 46h
+                rw[169:160] <= 10'h10;        // Address 40h
+                rw[175:172] <= 4'b1000;       // Write byte 3
+            end
+            5: begin  // ISA CLK Divider (50h)
+                rw[RWPOS_CFG_WR_EN] <= 1'b1;
+                rw[159:128] <= 32'h00000043;  // Default 43h
+                rw[169:160] <= 10'h14;        // Address 50h
+                rw[175:172] <= 4'b0001;       // Write byte 0
+            end
+            6: begin  // ISA I/O Recovery Control (51h)
+                rw[RWPOS_CFG_WR_EN] <= 1'b1;
+                rw[159:128] <= 32'h00000043;  // Default 43h
+                rw[169:160] <= 10'h14;        // Address 50h
+                rw[175:172] <= 4'b0010;       // Write byte 1
+            end
+            7: begin  // ROM/AT Logic Control (52h)
+                rw[RWPOS_CFG_WR_EN] <= 1'b1;
+                rw[159:128] <= 32'h00000004;  // Default 04h
+                rw[169:160] <= 10'h14;        // Address 50h
+                rw[175:172] <= 4'b0100;       // Write byte 2
+            end
+            8: begin  // Decode Control Register 2 (5Bh)
+                rw[RWPOS_CFG_WR_EN] <= 1'b1;
+                rw[159:128] <= 32'h00000000;  // Default 00h
+                rw[169:160] <= 10'h16;        // Address 5Bh
+                rw[175:172] <= 4'b0001;       // Write byte 0
+            end
+            default: next_cfg_task <= 0;
+        endcase
+        if(next_cfg_task < 8)
+            next_cfg_task <= next_cfg_task + 1;
+        else
+            next_cfg_task <= 0;
+    end
                     
 
                 // CONFIG SPACE READ/WRITE                        
