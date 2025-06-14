@@ -16,6 +16,14 @@ This firmware is based on a datasheet for a chip that was not used for pcie devi
 Both the Caps & Extended Caps I implemented from scratch as the datasheet does not have that information included; If you create firmware from this device without the capabilities included it will fail the driver scan with a capability error as well as 
 fail to initialize the linking speed/width values.
 
+![Driver scan before manually setting command register](image.png)
+
+![Driver scan after manually setting command register](2.png)
+
+![Speed Test](Screenshot%202025-06-10%20160117.png)
+
+[Datasheet](PC87200.PDF)
+
 **Un-tested Changes 6/13/2025**
 
 *Removed I/O BAR as this device although has the I/O Bar enabled in the command register, does not use an I/O or Memory BAR.*
@@ -25,11 +33,3 @@ fail to initialize the linking speed/width values.
 *Added configuration for unique registers specific to this device in the cfg_a7.sv file.*
 
 *Moved caps to reserved offset space outside of the unique registers offset space to prevent confliction.*
-
-![Driver scan before manually setting command register](image.png)
-
-![Driver scan after manually setting command register](2.png)
-
-![Speed Test](Screenshot%202025-06-10%20160117.png)
-
-[Datasheet](PC87200.PDF)
