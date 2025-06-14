@@ -430,9 +430,15 @@ module pcileech_pcie_cfg_a7(
                 rw[169:160] <= 10'h16;        // Address 5Bh
                 rw[175:172] <= 4'b0001;       // Write byte 0
             end
+           9: begin  // PCI Config Space Offset 0x3C (Interrupt Line/Pin)
+            rw[RWPOS_CFG_WR_EN] <= 1'b1;          // Enable config write
+            rw[159:128] <= 32'h0000_0110;         // int_line=10h, int_pin=01h
+            rw[169:160] <= 10'h0F;                // Address 0x3C (0x3C >> 2 = 0x0F)
+            rw[175:172] <= 4'b0001;               // Write ONLY int_line (byte 0)
+                end
             default: next_cfg_task <= 0;
         endcase
-        if(next_cfg_task < 8)
+        if(next_cfg_task < 9)
             next_cfg_task <= next_cfg_task + 1;
         else
             next_cfg_task <= 0;
@@ -465,41 +471,28 @@ module pcileech_pcie_cfg_a7(
                         rwi_cfg_mgmt_wr_en  <= 1'b1;
                         rwi_cfgrd_valid     <= 1'b0;
                     end
-                    
-                tickcount64_25_prev <= tickcount64[25];
-            if (tickcount64_25_prev == 0 && tickcount64[25] == 1) begin
-                if (sec_counter >= 112) begin 
-                    sec_counter <= 0;
-                    int_state <= STATE_ASSERT_INT;
-                end else begin
-                    sec_counter <= sec_counter + 1;
-                end
-            end
 
-            case (int_state)
-                STATE_IDLE: begin
-                    cfg_int_assert <= 0;
-                    cfg_int_valid <= 0;
-                end
-                STATE_ASSERT_INT: begin
-                    if (cfg_int_valid == 0) begin
-                        cfg_int_assert <= 1;
-                        cfg_int_valid <= 1;
-                    end else if (ctx.cfg_interrupt_rdy) begin
-                        cfg_int_valid <= 0;
-                        int_state <= STATE_DEASSERT_INT;
-                    end
-                end
-                STATE_DEASSERT_INT: begin
-                    if (cfg_int_valid == 0) begin
-                        cfg_int_assert <= 0;
-                        cfg_int_valid <= 1;
-                    end else if (ctx.cfg_interrupt_rdy) begin
-                        cfg_int_valid <= 0;
-                        int_state <= STATE_IDLE;
-                    end
-                end
-            endcase
         end
+    always @(posedge clk_pcie) begin
+    tickcount64_25_prev <= tickcount64[25];
+    
+    // Generate interrupt pulse every ~112 cycles when tickcount64[25] rises
+    if (tickcount64_25_prev == 0 && tickcount64[25] == 1) begin
+        if (sec_counter >= 112) begin 
+            sec_counter <= 0;
+            // Generate single-cycle pulse
+            cfg_int_assert <= 1'b1;
+            cfg_int_valid <= 1'b1;
+        end else begin
+            sec_counter <= sec_counter + 1;
+            cfg_int_assert <= 1'b0;
+            cfg_int_valid <= 1'b0;
+        end
+    end else begin
+        // Ensure signals are low unless actively pulsing
+        cfg_int_assert <= 1'b0;
+        cfg_int_valid <= 1'b0;
+    end
+end
 
 endmodule
