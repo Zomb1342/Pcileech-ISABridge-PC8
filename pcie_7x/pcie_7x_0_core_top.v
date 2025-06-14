@@ -81,10 +81,10 @@ module pcie_7x_0_core_top # (
   parameter         AER_CAP_MULTIHEADER = "FALSE",
   parameter [11:0]  AER_CAP_NEXTPTR = 12'h000,
   parameter [23:0]  AER_CAP_OPTIONAL_ERR_SUPPORT = 24'h000000,
-  parameter         AER_CAP_ON = "TRUE",
+  parameter         AER_CAP_ON = "FALSE",
   parameter         AER_CAP_PERMIT_ROOTERR_UPDATE = "FALSE",
 
-  parameter [31:0]  BAR0 = 32'hFFFFF001,
+  parameter [31:0]  BAR0 = 32'h00000000,
   parameter [31:0]  BAR1 = 32'h00000000,
   parameter [31:0]  BAR2 = 32'h00000000,
   parameter [31:0]  BAR3 = 32'h00000000,
@@ -264,7 +264,7 @@ module pcie_7x_0_core_top # (
   parameter [4:0]   INFER_EI = 5'h00,
   parameter         IS_SWITCH = "FALSE",
 
-  parameter         LINK_CAP_ASPM_SUPPORT = 1,
+  parameter         LINK_CAP_ASPM_SUPPORT = 0,
   parameter         LINK_CAP_CLOCK_POWER_MANAGEMENT = "FALSE",
   parameter         LINK_CAP_L0S_EXIT_LATENCY_COMCLK_GEN1 = 7,
   parameter         LINK_CAP_L0S_EXIT_LATENCY_COMCLK_GEN2 = 7,
@@ -356,7 +356,7 @@ module pcie_7x_0_core_top # (
   parameter         EXIT_LOOPBACK_ON_EI = "TRUE",
 
   parameter         CFG_ECRC_ERR_CPLSTAT = 0,
-  parameter [7:0]   CAPABILITIES_PTR = 8'h100,
+  parameter [7:0]   CAPABILITIES_PTR = 8'h60,
   parameter [6:0]   CRM_MODULE_RSTS = 7'h00,
   parameter         DEV_CAP_ENABLE_SLOT_PWR_LIMIT_SCALE = "TRUE",
   parameter         DEV_CAP_ENABLE_SLOT_PWR_LIMIT_VALUE = "TRUE",
