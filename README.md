@@ -17,10 +17,13 @@ Both the Caps & Extended Caps I implemented from scratch as the datasheet does n
 fail to initialize the linking speed/width values.
 
 **Un-tested Changes 6/13/2025**
+
 *Removed I/O BAR as this device although has the I/O Bar enabled in the command register, does not use an I/O or Memory BAR.*
+
 *Removed propbing for BAR size and configuration of the BAR as it is not neccessary.*
 
 *Added configuration for unique registers specific to this device in the cfg_a7.sv file.*
+
 *Moved caps to reserved offset space outside of the unique registers offset space to prevent confliction.*
 
 ![Driver scan before manually setting command register](image.png)
