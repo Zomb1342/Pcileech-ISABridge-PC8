@@ -76,7 +76,6 @@ module pcileech_pcie_a7(
         .clk_pcie                   ( clk_pcie                  ),
         .dfifo                      ( dfifo_cfg                 ),        
         .ctx                        ( ctx                       ),
-        .tlps_static                ( tlps_static.source        ),
         .pcie_id                    ( pcie_id                   )   // -> [15:0]
     );
     
