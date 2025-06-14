@@ -19,9 +19,9 @@ module pcileech_pcie_tlp_a7(
     // PCIe core receive/transmit data
     IfAXIS128.source        tlps_tx,
     IfAXIS128.sink_lite     tlps_rx,
-    IfAXIS128.sink          tlps_static,
     IfShadow2Fifo.shadow    dshadow2fifo,
-    input [15:0]            pcie_id
+    input [15:0]            pcie_id,
+    input [31:0]            base_address_register
     );
     
     IfAXIS128 tlps_bar_rsp();
@@ -33,12 +33,13 @@ module pcileech_pcie_tlp_a7(
     IfAXIS128 tlps_filtered();
     
     pcileech_tlps128_bar_controller i_pcileech_tlps128_bar_controller(
-        .rst            ( rst                           ),
-        .clk            ( clk_pcie                      ),
-        .bar_en         ( dshadow2fifo.bar_en           ),
-        .pcie_id        ( pcie_id                       ),
-        .tlps_in        ( tlps_rx                       ),
-        .tlps_out       ( tlps_bar_rsp.source           )
+        .rst                   ( rst                    ),
+        .clk                   ( clk_pcie               ),
+        .bar_en                ( dshadow2fifo.bar_en    ),
+        .pcie_id               ( pcie_id                ),
+        .base_address_register ( base_address_register  ),
+        .tlps_in               ( tlps_rx                ),
+        .tlps_out              ( tlps_bar_rsp.source    )
     );
     
     pcileech_tlps128_cfgspace_shadow i_pcileech_tlps128_cfgspace_shadow(
@@ -89,17 +90,16 @@ module pcileech_pcie_tlp_a7(
         .tlps_out       ( tlps_tx                       ),
         .tlps_in1       ( tlps_cfg_rsp.sink             ),
         .tlps_in2       ( tlps_bar_rsp.sink             ),
-        .tlps_in3       ( tlps_rx_fifo.sink             ),
-        .tlps_in4       ( tlps_static                   )
+        .tlps_in3       ( tlps_rx_fifo.sink             )
     );
-
+    
 endmodule
 
 
 
 // ------------------------------------------------------------------------
 // TLP-AXI-STREAM destination:
-// Forward the data to output device (FT601, etc.). 
+// Forward the data to output device (e.g., FT601).
 // ------------------------------------------------------------------------
 module pcileech_tlps128_dst_fifo(
     input                   rst,
@@ -162,37 +162,42 @@ module pcileech_tlps128_filter(
     IfAXIS128.source_lite   tlps_out
 );
 
-    bit [127:0]     tdata;
-    bit [3:0]       tkeepdw;
-    bit             tvalid  = 0;
-    bit [8:0]       tuser;
-    bit             tlast;
-    
+    reg [127:0]     tdata;
+    reg [3:0]       tkeepdw;
+    reg             tvalid  = 0;
+    reg [8:0]       tuser;
+    reg             tlast;
+    reg             filter = 0;
+
     assign tlps_out.tdata   = tdata;
     assign tlps_out.tkeepdw = tkeepdw;
     assign tlps_out.tvalid  = tvalid;
     assign tlps_out.tuser   = tuser;
     assign tlps_out.tlast   = tlast;
     
-    bit  filter = 0;
     wire first = tlps_in.tuser[0];
     wire is_tlphdr_cpl = first && (
-                        (tlps_in.tdata[31:25] == 7'b0000101) ||      // Cpl:  Fmt[2:0]=000b (3 DW header, no data), Cpl=0101xb
-                        (tlps_in.tdata[31:25] == 7'b0100101)         // CplD: Fmt[2:0]=010b (3 DW header, data),    CplD=0101xb
+                        (tlps_in.tdata[31:25] == 7'b0000101) ||      // Cpl:  Fmt[2:0]=000b, Type=0101xb
+                        (tlps_in.tdata[31:25] == 7'b0100101)         // CplD: Fmt[2:0]=010b, Type=0101xb
                       );
     wire is_tlphdr_cfg = first && (
-                        (tlps_in.tdata[31:25] == 7'b0000010) ||      // CfgRd: Fmt[2:0]=000b (3 DW header, no data), CfgRd0/CfgRd1=0010xb
-                        (tlps_in.tdata[31:25] == 7'b0100010)         // CfgWr: Fmt[2:0]=010b (3 DW header, data),    CfgWr0/CfgWr1=0010xb
+                        (tlps_in.tdata[31:25] == 7'b0000010) ||      // CfgRd: Fmt[2:0]=000b, Type=0010xb
+                        (tlps_in.tdata[31:25] == 7'b0100010)         // CfgWr: Fmt[2:0]=010b, Type=0010xb
                       );
     wire filter_next = (filter && !first) || (cfgtlp_filter && first && is_tlphdr_cfg) || (alltlp_filter && first && !is_tlphdr_cpl && !is_tlphdr_cfg);
                       
     always @ ( posedge clk_pcie ) begin
-        tdata   <= tlps_in.tdata;
-        tkeepdw <= tlps_in.tkeepdw;
-        tvalid  <= tlps_in.tvalid && !filter_next && !rst;
-        tuser   <= tlps_in.tuser;
-        tlast   <= tlps_in.tlast;
-        filter  <= filter_next && !rst;
+        if (rst) begin
+            filter <= 0;
+            tvalid <= 0;
+        end else begin
+            tdata   <= tlps_in.tdata;
+            tkeepdw <= tlps_in.tkeepdw;
+            tvalid  <= tlps_in.tvalid && !filter_next;
+            tuser   <= tlps_in.tuser;
+            tlast   <= tlps_in.tlast;
+            filter  <= filter_next;
+        end
     end
     
 endmodule
@@ -201,7 +206,7 @@ endmodule
 
 // ------------------------------------------------------------------------
 // RX FROM FIFO - TLP-AXI-STREAM:
-// Convert 32-bit incoming data to 128-bit TLP-AXI-STREAM to be sent onwards to mux/pcie core. 
+// Convert 32-bit incoming data to 128-bit TLP-AXI-STREAM to be sent onwards to mux/pcie core.
 // ------------------------------------------------------------------------
 module pcileech_tlps128_src_fifo (
     input                   rst,
@@ -214,10 +219,10 @@ module pcileech_tlps128_src_fifo (
 );
 
     // 1: 32-bit -> 128-bit state machine:
-    bit [127:0] tdata;
-    bit [3:0]   tkeepdw = 0;
-    bit         tlast;
-    bit         first   = 1;
+    reg [127:0] tdata;
+    reg [3:0]   tkeepdw = 0;
+    reg         tlast;
+    reg         first   = 1;
     wire        tvalid  = tlast || tkeepdw[3];
     
     always @ ( posedge clk_sys )
@@ -225,8 +230,7 @@ module pcileech_tlps128_src_fifo (
             tkeepdw <= 0;
             tlast   <= 0;
             first   <= 1;
-        end
-        else begin
+        end else begin
             tlast   <= dfifo_tx_valid && dfifo_tx_last;
             tkeepdw <= tvalid ? (dfifo_tx_valid ? 4'b0001 : 4'b0000) : (dfifo_tx_valid ? ((tkeepdw << 1) | 1'b1) : tkeepdw);
             first   <= tvalid ? tlast : first;
@@ -241,9 +245,9 @@ module pcileech_tlps128_src_fifo (
                     tdata[127:96] <= dfifo_tx_data;   
             end
         end
-		
+        
     // 2.1 - packet count (w/ safe fifo clock-crossing).
-    bit [10:0]  pkt_count       = 0;
+    reg [10:0]  pkt_count       = 0;
     wire        pkt_count_dec   = tlps_out.tvalid && tlps_out.tlast;
     wire        pkt_count_inc;
     wire [10:0] pkt_count_next  = pkt_count + pkt_count_inc - pkt_count_dec;
@@ -261,7 +265,7 @@ module pcileech_tlps128_src_fifo (
         .empty          (                           ),
         .valid          ( pkt_count_inc             )
     );
-	
+    
     always @ ( posedge clk_pcie ) begin
         pkt_count <= rst ? 0 : pkt_count_next;
     end
@@ -289,7 +293,7 @@ endmodule
 // RX MUX - TLP-AXI-STREAM:
 // Select the TLP-AXI-STREAM with the highest priority (lowest number) and
 // let it transmit its full packet.
-// Each incoming stream must have latency of 1CLK. 
+// Each incoming stream must have latency of 1CLK.
 // ------------------------------------------------------------------------
 module pcileech_tlps128_sink_mux1 (
     input                       clk_pcie,
@@ -297,52 +301,47 @@ module pcileech_tlps128_sink_mux1 (
     IfAXIS128.source            tlps_out,
     IfAXIS128.sink              tlps_in1,
     IfAXIS128.sink              tlps_in2,
-    IfAXIS128.sink              tlps_in3,
-    IfAXIS128.sink              tlps_in4
+    IfAXIS128.sink              tlps_in3
 );
-    bit [2:0] id = 0;
+    reg [1:0] id = 0;
     
-    assign tlps_out.has_data    = tlps_in1.has_data || tlps_in2.has_data || tlps_in3.has_data || tlps_in4.has_data;
+    assign tlps_out.has_data    = tlps_in1.has_data || tlps_in2.has_data || tlps_in3.has_data;
     
     assign tlps_out.tdata       = (id==1) ? tlps_in1.tdata :
                                   (id==2) ? tlps_in2.tdata :
-                                  (id==3) ? tlps_in3.tdata :
-                                  (id==4) ? tlps_in4.tdata : 0;
+                                  (id==3) ? tlps_in3.tdata : 0;
     
     assign tlps_out.tkeepdw     = (id==1) ? tlps_in1.tkeepdw :
                                   (id==2) ? tlps_in2.tkeepdw :
-                                  (id==3) ? tlps_in3.tkeepdw :
-                                  (id==4) ? tlps_in4.tkeepdw : 0;
+                                  (id==3) ? tlps_in3.tkeepdw : 0;
     
     assign tlps_out.tlast       = (id==1) ? tlps_in1.tlast :
                                   (id==2) ? tlps_in2.tlast :
-                                  (id==3) ? tlps_in3.tlast :
-                                  (id==4) ? tlps_in4.tlast : 0;
+                                  (id==3) ? tlps_in3.tlast : 0;
     
     assign tlps_out.tuser       = (id==1) ? tlps_in1.tuser :
                                   (id==2) ? tlps_in2.tuser :
-                                  (id==3) ? tlps_in3.tuser :
-                                  (id==4) ? tlps_in4.tuser : 0;
+                                  (id==3) ? tlps_in3.tuser : 0;
     
     assign tlps_out.tvalid      = (id==1) ? tlps_in1.tvalid :
                                   (id==2) ? tlps_in2.tvalid :
-                                  (id==3) ? tlps_in3.tvalid :
-                                  (id==4) ? tlps_in4.tvalid : 0;
+                                  (id==3) ? tlps_in3.tvalid : 0;
     
-    wire [2:0] id_next_newsel   = tlps_in1.has_data ? 1 :
+    wire [1:0] id_next_newsel   = tlps_in1.has_data ? 1 :
                                   tlps_in2.has_data ? 2 :
-                                  tlps_in3.has_data ? 3 :
-                                  tlps_in4.has_data ? 4 : 0;
+                                  tlps_in3.has_data ? 3 : 0;
     
-    wire [2:0] id_next          = ((id==0) || (tlps_out.tvalid && tlps_out.tlast)) ? id_next_newsel : id;
+    wire [1:0] id_next          = ((id==0) || (tlps_out.tvalid && tlps_out.tlast)) ? id_next_newsel : id;
     
     assign tlps_in1.tready      = tlps_out.tready && (id_next==1);
     assign tlps_in2.tready      = tlps_out.tready && (id_next==2);
     assign tlps_in3.tready      = tlps_out.tready && (id_next==3);
-    assign tlps_in4.tready      = tlps_out.tready && (id_next==4);
     
     always @ ( posedge clk_pcie ) begin
-        id <= rst ? 0 : id_next;
+        if (rst)
+            id <= 0;
+        else
+            id <= id_next;
     end
     
 endmodule
