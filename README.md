@@ -4,7 +4,9 @@ FPGA mimicking a PCI - ISA Bridge. Has not been tested thrououghly and has been 
 
 Issues with firmware in its current state:
 
-1.) Interrupts are not firing; 
+1.) Interrupts are not firing. The device will not be assigned a valid int_line value so I do not think it can generate interrupts.
+- Possible Fix -
+- Manually build msi cap in the core and attempt to use msi interrupts.
 
 More Info:
 
