@@ -75,9 +75,9 @@ module pcie_7x_0_core_top # (
 
   parameter         ALLOW_X8_GEN2 = "FALSE",
   parameter         PIPE_PIPELINE_STAGES = 1,
-  parameter [11:0]  AER_BASE_PTR = 12'h100,
-  parameter         AER_CAP_ECRC_CHECK_CAPABLE = "FALSE",
-  parameter         AER_CAP_ECRC_GEN_CAPABLE = "FALSE",
+  parameter [11:0]  AER_BASE_PTR = 12'h120,
+  parameter         AER_CAP_ECRC_CHECK_CAPABLE = "TRUE",
+  parameter         AER_CAP_ECRC_GEN_CAPABLE = "TRUE",
   parameter         AER_CAP_MULTIHEADER = "FALSE",
   parameter [11:0]  AER_CAP_NEXTPTR = 12'h000,
   parameter [23:0]  AER_CAP_OPTIONAL_ERR_SUPPORT = 24'h000000,
@@ -166,7 +166,7 @@ module pcie_7x_0_core_top # (
    parameter         PM_CAP_DSI = "FALSE",
   parameter         PM_CAP_D1SUPPORT = "FALSE",
   parameter         PM_CAP_D2SUPPORT = "FALSE",
-  parameter [7:0]   PM_CAP_NEXTPTR = 8'h64,
+  parameter [7:0]   PM_CAP_NEXTPTR = 8'h80,
   parameter [4:0]   PM_CAP_PMESUPPORT = 5'h00,
   parameter         PM_CSR_NOSOFTRST = "TRUE",
 
@@ -289,7 +289,7 @@ module pcie_7x_0_core_top # (
   parameter         N_FTS_GEN1 = 255,
   parameter         N_FTS_GEN2 = 255,
 
-  parameter [7:0]   PCIE_BASE_PTR = 8'h64,
+  parameter [7:0]   PCIE_BASE_PTR = 8'h80,
   parameter [7:0]   PCIE_CAP_CAPABILITY_ID = 8'h10,
   parameter [3:0]   PCIE_CAP_CAPABILITY_VERSION = 4'h2,
   parameter         PCIE_CAP_ON = "TRUE",
@@ -306,7 +306,7 @@ module pcie_7x_0_core_top # (
   parameter         TRANSCEIVER_CTRL_STATUS_PORTS = "FALSE", 
   parameter         SHARED_LOGIC_IN_CORE = "FALSE",
 
-  parameter [7:0]   PM_BASE_PTR = 8'h50,
+  parameter [7:0]   PM_BASE_PTR = 8'h60,
   parameter         PM_CAP_AUXCURRENT = 0,
   parameter [7:0]   PM_CAP_ID = 8'h01,
   parameter         PM_CAP_ON = "TRUE",
@@ -356,7 +356,7 @@ module pcie_7x_0_core_top # (
   parameter         EXIT_LOOPBACK_ON_EI = "TRUE",
 
   parameter         CFG_ECRC_ERR_CPLSTAT = 0,
-  parameter [7:0]   CAPABILITIES_PTR = 8'h50,
+  parameter [7:0]   CAPABILITIES_PTR = 8'h100,
   parameter [6:0]   CRM_MODULE_RSTS = 7'h00,
   parameter         DEV_CAP_ENABLE_SLOT_PWR_LIMIT_SCALE = "TRUE",
   parameter         DEV_CAP_ENABLE_SLOT_PWR_LIMIT_VALUE = "TRUE",
