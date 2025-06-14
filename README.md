@@ -4,10 +4,25 @@ FPGA mimicking a PCI - ISA Bridge. Has not been tested thrououghly and has been 
 
 **Issues with firmware in its current state:**
 
-- Interrupts are not firing. The device will not be assigned a valid int_line value so I do not think it can generate interrupts.
+- Interrupts are not firing. I had to manually configure an in_line value in the cfg_a7.sv file otherwise it gets set to 0xFF.
+- Driver shows no issues in device manager, IRQ gets assigned to the correct value in the resources tab.
+- Get-PnpDevice | Where-Object { $_.InstanceId -match "VEN_XXXX" } | Format-List *  I input this command in the Powershell & found an error "CM_PROB_PHANTOM"
 
- **Possible Fix**
-- Manually build msi cap in the core and attempt to use msi interrupts.
+Code 45 - CM_PROB_PHANTOM
+03/13/2023
+This Device Manager error message indicates that the device is not present.
+
+Error Code
+45
+
+Display Message
+"Currently, this hardware device is not connected to the computer. (Code 45)"
+
+"To fix this problem, reconnect this hardware device to the computer."
+
+Recommended Resolution
+None. This problem code should only appear when the DEVMGR_SHOW_NONPRESENT_DEVICES environment variable is set.
+
 
 More Info:
 
