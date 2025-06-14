@@ -28,7 +28,7 @@ fail to initialize the linking speed/width values.
 
 *Removed I/O BAR as this device although has the I/O Bar enabled in the command register, does not use an I/O or Memory BAR.*
 
-*Removed propbing for BAR size and configuration of the BAR as it is not neccessary.*
+*Removed probing for BAR size and configuration of the BAR as it is not neccessary.*
 
 *Added configuration for unique registers specific to this device in the cfg_a7.sv file.*
 
