@@ -23,9 +23,9 @@ Display Message
 Recommended Resolution
 None. This problem code should only appear when the DEVMGR_SHOW_NONPRESENT_DEVICES environment variable is set.
 
-**Its possbile that either this device does not generate interrupts or is not capable of generating interrupts in a modern pc.**
+***Its possbile that either this device does not generate interrupts or is not capable of generating interrupts in a modern pc.***
 
-More Info:
+**More Info:**
 
 This firmware is based on a datasheet for a chip that was not used for pcie devices but in industrial motherboards and I/O devices that required an ISA Bridge. Datasheet has been provided.
 
