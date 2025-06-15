@@ -20,11 +20,10 @@ Display Message
 
 "To fix this problem, reconnect this hardware device to the computer."
 
-**Its possbile that either this device does not generate interrupts or is not capable of generating interrupts in a modern pc.**
-
 Recommended Resolution
 None. This problem code should only appear when the DEVMGR_SHOW_NONPRESENT_DEVICES environment variable is set.
 
+**Its possbile that either this device does not generate interrupts or is not capable of generating interrupts in a modern pc.**
 
 More Info:
 
