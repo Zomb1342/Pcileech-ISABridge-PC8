@@ -160,7 +160,7 @@ module pcie_7x_0_core_top # (
   parameter [28:0]  MSIX_CAP_TABLE_OFFSET = 29'h0,
   parameter [10:0]  MSIX_CAP_TABLE_SIZE = 11'h000,
 
-  parameter [3:0]   PCIE_CAP_DEVICE_PORT_TYPE = 4'h0,
+  parameter [3:0]   PCIE_CAP_DEVICE_PORT_TYPE = 4'h8,
   parameter [7:0]   PCIE_CAP_NEXTPTR = 8'h00,
 
    parameter         PM_CAP_DSI = "FALSE",
