@@ -1,0 +1,24 @@
+vfio_mdev  (0000:2b:00.0) is_mdev 0
+vfio_device_attach  (0000:2b:00.0) group 16
+vfio_listener_region_add_ram region_add [ram] 0x0 - 0x9ffff [0x762573e00000]
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xc0000 - 0xdffff [0x762778400000]
+vfio_listener_region_add_ram region_add [ram] 0xe0000 - 0xfffff [0x762778620000]
+vfio_listener_region_add_ram region_add [ram] 0x100000 - 0xbfffffff [0x762573f00000]
+vfio_listener_region_skip SKIPPING region_add 0xfec00000 - 0xfec00fff
+vfio_listener_region_skip SKIPPING region_add 0xfed00000 - 0xfed003ff
+vfio_listener_region_skip SKIPPING region_add 0xfee00000 - 0xfeefffff
+vfio_listener_region_add_ram region_add [ram] 0xfffc0000 - 0xffffffff [0x762778600000]
+vfio_listener_region_add_ram region_add [ram] 0x100000000 - 0x23fffffff [0x762633e00000]
+vfio_listener_region_del region_del 0x0 - 0x9ffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_del region_del 0xc0000 - 0xdffff
+vfio_listener_region_del region_del 0xe0000 - 0xfffff
+vfio_listener_region_del region_del 0x100000 - 0xbfffffff
+vfio_listener_region_skip SKIPPING region_del 0xfec00000 - 0xfec00fff
+vfio_listener_region_skip SKIPPING region_del 0xfed00000 - 0xfed003ff
+vfio_listener_region_skip SKIPPING region_del 0xfee00000 - 0xfeefffff
+vfio_listener_region_del region_del 0xfffc0000 - 0xffffffff
+vfio_listener_region_del region_del 0x100000000 - 0x23fffffff
+vfio_container_disconnect close container->fd=42
+vfio_group_put close group->fd=41

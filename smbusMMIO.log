@@ -1,0 +1,705 @@
+vfio_mdev  (0000:00:14.0) is_mdev 0
+vfio_device_attach  (0000:00:14.0) group 12
+vfio_listener_region_add_ram region_add [ram] 0x0 - 0x9ffff [0x7326bfe00000]
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xc0000 - 0xdffff [0x7328d8200000]
+vfio_listener_region_add_ram region_add [ram] 0xe0000 - 0xfffff [0x7328d8420000]
+vfio_listener_region_add_ram region_add [ram] 0x100000 - 0xbfffffff [0x7326bff00000]
+vfio_listener_region_skip SKIPPING region_add 0xfec00000 - 0xfec00fff
+vfio_listener_region_skip SKIPPING region_add 0xfed00000 - 0xfed003ff
+vfio_listener_region_skip SKIPPING region_add 0xfee00000 - 0xfeefffff
+vfio_listener_region_add_ram region_add [ram] 0xfffc0000 - 0xffffffff [0x7328d8400000]
+vfio_listener_region_add_ram region_add [ram] 0x100000000 - 0x23fffffff [0x73277fe00000]
+vfio_device_get Device 0000:00:14.0 flags: 2, regions: 9, irqs: 5
+vfio_region_setup Device 0000:00:14.0, region 0 "0000:00:14.0 BAR 0", flags: 0x0, offset: 0x0, size: 0x0
+vfio_region_setup Device 0000:00:14.0, region 1 "0000:00:14.0 BAR 1", flags: 0x0, offset: 0x10000000000, size: 0x0
+vfio_region_setup Device 0000:00:14.0, region 2 "0000:00:14.0 BAR 2", flags: 0x0, offset: 0x20000000000, size: 0x0
+vfio_region_setup Device 0000:00:14.0, region 3 "0000:00:14.0 BAR 3", flags: 0x0, offset: 0x30000000000, size: 0x0
+vfio_region_setup Device 0000:00:14.0, region 4 "0000:00:14.0 BAR 4", flags: 0x0, offset: 0x40000000000, size: 0x0
+vfio_region_setup Device 0000:00:14.0, region 5 "0000:00:14.0 BAR 5", flags: 0x0, offset: 0x50000000000, size: 0x0
+vfio_pci_populate_device_config Device '0000:00:14.0' config: size: 0x100, offset: 0x70000000000, flags: 0x3
+vfio_pci_populate_device_get_irq_info_failure VFIO_DEVICE_GET_IRQ_INFO failure: Invalid argument
+vfio_pci_read_config  (0000:00:14.0, @0x3d, len=0x1) 0x0
+vfio_device_reset_handler 
+vfio_pci_hot_reset  (0000:00:14.0) multi
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x3
+vfio_pci_write_config  (0000:00:14.0, @0x4, 0x0, len=0x2)
+vfio_pci_read_config  (0000:00:14.0, @0x3d, len=0x1) 0x0
+vfio_pci_reset  (0000:00:14.0)
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x4, 0x0, len=0x2)
+vfio_pci_hot_reset  (0000:00:14.0) one
+vfio_pci_read_config  (0000:00:14.0, @0x3d, len=0x1) 0x0
+vfio_listener_region_del region_del 0xc0000 - 0xdffff
+vfio_listener_region_del region_del 0xe0000 - 0xfffff
+vfio_listener_region_del region_del 0x100000 - 0xbfffffff
+vfio_listener_region_add_ram region_add [ram] 0xc0000 - 0xcffff [0x7326bfec0000]
+vfio_listener_region_add_ram region_add [ram] 0xd0000 - 0xdffff [0x7328d8210000]
+vfio_listener_region_add_ram region_add [ram] 0xe0000 - 0xeffff [0x7328d8420000]
+vfio_listener_region_add_ram region_add [ram] 0xf0000 - 0xbfffffff [0x7326bfef0000]
+vfio_listener_region_del region_del 0xc0000 - 0xcffff
+vfio_listener_region_del region_del 0xd0000 - 0xdffff
+vfio_listener_region_del region_del 0xe0000 - 0xeffff
+vfio_listener_region_del region_del 0xf0000 - 0xbfffffff
+vfio_listener_region_add_ram region_add [ram] 0xc0000 - 0xbfffffff [0x7326bfec0000]
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0xa, len=0x2) 0xc05
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0xa, len=0x2) 0xc05
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x4) 0x790b1022
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x4) 0xc050061
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x10, 0xffffffff, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x10, 0x0, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x14, 0xffffffff, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x14, 0x0, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x18, 0xffffffff, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x18, 0x0, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x1c, 0xffffffff, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x1c, 0x0, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x20, 0xffffffff, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x20, 0x0, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x24, 0xffffffff, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x24, 0x0, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x30, 0xfffff800, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x30, 0x0, len=0x4)
+vfio_listener_region_add_ram region_add [ram] 0xfd000000 - 0xfdffffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xfebf0000 - 0xfebf017f
+vfio_listener_region_skip SKIPPING region_add 0xfebf0180 - 0xfebf03ff
+vfio_listener_region_skip SKIPPING region_add 0xfebf0400 - 0xfebf041f
+vfio_listener_region_skip SKIPPING region_add 0xfebf0420 - 0xfebf04ff
+vfio_listener_region_skip SKIPPING region_add 0xfebf0500 - 0xfebf0515
+vfio_listener_region_skip SKIPPING region_add 0xfebf0516 - 0xfebf05ff
+vfio_listener_region_skip SKIPPING region_add 0xfebf0600 - 0xfebf0607
+vfio_listener_region_skip SKIPPING region_add 0xfebf0608 - 0xfebf0fff
+vfio_listener_region_skip SKIPPING region_add 0xfebc0000 - 0xfebdffff
+vfio_pci_read_config  (0000:00:14.0, @0x3d, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x4, 0x103, len=0x2)
+vfio_listener_region_del region_del 0x0 - 0x9ffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_del region_del 0xc0000 - 0xbfffffff
+vfio_listener_region_add_ram region_add [ram] 0x0 - 0xbfffffff [0x7326bfe00000]
+vfio_listener_region_del region_del 0x0 - 0xbfffffff
+vfio_listener_region_add_ram region_add [ram] 0x0 - 0x9ffff [0x7326bfe00000]
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xc0000 - 0xbfffffff [0x7326bfec0000]
+vfio_pci_read_config  (0000:00:14.0, @0x3d, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x3c, len=0x1) 0x0
+vfio_listener_region_add_ram region_add [ram] 0xfebe0000 - 0xfebeffff [0x7328c4400000]
+vfio_listener_region_del region_del 0xfebe0000 - 0xfebeffff
+vfio_listener_region_add_ram region_add [ram] 0xfeb80000 - 0xfebbffff [0x7328c4200000]
+vfio_listener_region_del region_del 0xfeb80000 - 0xfebbffff
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x30, 0xfffffffe, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x30, 0x0, len=0x4)
+vfio_listener_region_del region_del 0xc0000 - 0xbfffffff
+vfio_listener_region_add_ram region_add [ram] 0xc0000 - 0xcafff [0x7326bfec0000]
+vfio_listener_region_add_ram region_add [ram] 0xcb000 - 0xcdfff [0x7326bfecb000]
+vfio_listener_region_add_ram region_add [ram] 0xce000 - 0xcffff [0x7326bfece000]
+vfio_listener_region_add_ram region_add [ram] 0xd0000 - 0xeffff [0x7326bfed0000]
+vfio_listener_region_add_ram region_add [ram] 0xf0000 - 0xfffff [0x7326bfef0000]
+vfio_listener_region_add_ram region_add [ram] 0x100000 - 0xbfffffff [0x7326bff00000]
+vfio_listener_region_del region_del 0xce000 - 0xcffff
+vfio_listener_region_del region_del 0xd0000 - 0xeffff
+vfio_listener_region_add_ram region_add [ram] 0xce000 - 0xe7fff [0x7326bfece000]
+vfio_listener_region_add_ram region_add [ram] 0xe8000 - 0xeffff [0x7326bfee8000]
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x4) 0x790b1022
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x4) 0x2200103
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x4) 0xc050061
+vfio_pci_read_config  (0000:00:14.0, @0xc, len=0x4) 0x0
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x4) 0x790b1022
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x4) 0x2200103
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x4) 0xc050061
+vfio_pci_read_config  (0000:00:14.0, @0xc, len=0x4) 0x0
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x4) 0x790b1022
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x4) 0x2200103
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x4) 0xc050061
+vfio_pci_read_config  (0000:00:14.0, @0xc, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x28, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x2c, len=0x4) 0x7c561462
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x34, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x38, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x3c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x4) 0x790b1022
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x4) 0x2200103
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x4) 0xc050061
+vfio_pci_read_config  (0000:00:14.0, @0xc, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x28, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x2c, len=0x4) 0x7c561462
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x34, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x38, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x3c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x4) 0x790b1022
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x4) 0x2200103
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x4) 0xc050061
+vfio_pci_read_config  (0000:00:14.0, @0xc, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x28, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x2c, len=0x4) 0x7c561462
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x34, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x38, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x3c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xb, len=0x1) 0xc
+vfio_pci_read_config  (0000:00:14.0, @0xa, len=0x1) 0x5
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x34, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x34, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_listener_region_del region_del 0xfd000000 - 0xfdffffff
+vfio_listener_region_skip SKIPPING region_del 0xfebf0000 - 0xfebf017f
+vfio_listener_region_skip SKIPPING region_del 0xfebf0180 - 0xfebf03ff
+vfio_listener_region_skip SKIPPING region_del 0xfebf0400 - 0xfebf041f
+vfio_listener_region_skip SKIPPING region_del 0xfebf0420 - 0xfebf04ff
+vfio_listener_region_skip SKIPPING region_del 0xfebf0500 - 0xfebf0515
+vfio_listener_region_skip SKIPPING region_del 0xfebf0516 - 0xfebf05ff
+vfio_listener_region_skip SKIPPING region_del 0xfebf0600 - 0xfebf0607
+vfio_listener_region_skip SKIPPING region_del 0xfebf0608 - 0xfebf0fff
+vfio_listener_region_add_ram region_add [ram] 0xfd000000 - 0xfdffffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xfebf0000 - 0xfebf017f
+vfio_listener_region_skip SKIPPING region_add 0xfebf0180 - 0xfebf03ff
+vfio_listener_region_skip SKIPPING region_add 0xfebf0400 - 0xfebf041f
+vfio_listener_region_skip SKIPPING region_add 0xfebf0420 - 0xfebf04ff
+vfio_listener_region_skip SKIPPING region_add 0xfebf0500 - 0xfebf0515
+vfio_listener_region_skip SKIPPING region_add 0xfebf0516 - 0xfebf05ff
+vfio_listener_region_skip SKIPPING region_add 0xfebf0600 - 0xfebf0607
+vfio_listener_region_skip SKIPPING region_add 0xfebf0608 - 0xfebf0fff
+vfio_listener_region_skip SKIPPING region_del 0xfebc0000 - 0xfebdffff
+vfio_listener_region_skip SKIPPING region_add 0xfebc0000 - 0xfebdffff
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x2, len=0x2) 0x790b
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x1) 0x61
+vfio_pci_read_config  (0000:00:14.0, @0x9, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xa, len=0x1) 0x5
+vfio_pci_read_config  (0000:00:14.0, @0xb, len=0x1) 0xc
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x2c, len=0x2) 0x1462
+vfio_pci_read_config  (0000:00:14.0, @0x2e, len=0x2) 0x7c56
+vfio_pci_read_config  (0000:00:14.0, @0x6, len=0x2) 0x220
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_pci_read_config  (0000:00:14.0, @0xc, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xd, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x3c, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x3d, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_pci_write_config  (0000:00:14.0, @0x4, 0x500, len=0x2)
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x10, 0xffffffff, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x14, 0xffffffff, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x18, 0xffffffff, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x1c, 0xffffffff, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x20, 0xffffffff, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x24, 0xffffffff, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x10, 0x0, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x14, 0x0, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x18, 0x0, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x1c, 0x0, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x20, 0x0, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x24, 0x0, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x30, 0xffffffff, len=0x4)
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_write_config  (0000:00:14.0, @0x30, 0x0, len=0x4)
+vfio_pci_write_config  (0000:00:14.0, @0x4, 0x103, len=0x2)
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x2, len=0x2) 0x790b
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_pci_read_config  (0000:00:14.0, @0x6, len=0x2) 0x220
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x2) 0x61
+vfio_pci_read_config  (0000:00:14.0, @0xa, len=0x2) 0xc05
+vfio_pci_read_config  (0000:00:14.0, @0xc, len=0x2) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x2) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x2) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x12, len=0x2) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x2) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x16, len=0x2) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x2) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x2, len=0x2) 0x790b
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x1) 0x61
+vfio_pci_read_config  (0000:00:14.0, @0x9, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xa, len=0x1) 0x5
+vfio_pci_read_config  (0000:00:14.0, @0xb, len=0x1) 0xc
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x2c, len=0x2) 0x1462
+vfio_pci_read_config  (0000:00:14.0, @0x2e, len=0x2) 0x7c56
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_listener_region_del region_del 0xfd000000 - 0xfdffffff
+vfio_listener_region_skip SKIPPING region_del 0xfebf0000 - 0xfebf017f
+vfio_listener_region_skip SKIPPING region_del 0xfebf0180 - 0xfebf03ff
+vfio_listener_region_skip SKIPPING region_del 0xfebf0400 - 0xfebf041f
+vfio_listener_region_skip SKIPPING region_del 0xfebf0420 - 0xfebf04ff
+vfio_listener_region_skip SKIPPING region_del 0xfebf0500 - 0xfebf0515
+vfio_listener_region_skip SKIPPING region_del 0xfebf0516 - 0xfebf05ff
+vfio_listener_region_skip SKIPPING region_del 0xfebf0600 - 0xfebf0607
+vfio_listener_region_skip SKIPPING region_del 0xfebf0608 - 0xfebf0fff
+vfio_listener_region_add_ram region_add [ram] 0xfd000000 - 0xfdffffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xfebf0000 - 0xfebf017f
+vfio_listener_region_skip SKIPPING region_add 0xfebf0180 - 0xfebf03ff
+vfio_listener_region_skip SKIPPING region_add 0xfebf0400 - 0xfebf041f
+vfio_listener_region_skip SKIPPING region_add 0xfebf0420 - 0xfebf04ff
+vfio_listener_region_skip SKIPPING region_add 0xfebf0500 - 0xfebf0515
+vfio_listener_region_skip SKIPPING region_add 0xfebf0516 - 0xfebf05ff
+vfio_listener_region_skip SKIPPING region_add 0xfebf0600 - 0xfebf0607
+vfio_listener_region_skip SKIPPING region_add 0xfebf0608 - 0xfebf0fff
+vfio_listener_region_skip SKIPPING region_del 0xfebc0000 - 0xfebdffff
+vfio_listener_region_skip SKIPPING region_add 0xfebc0000 - 0xfebdffff
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x2, len=0x2) 0x790b
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x1) 0x61
+vfio_pci_read_config  (0000:00:14.0, @0x9, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xa, len=0x1) 0x5
+vfio_pci_read_config  (0000:00:14.0, @0xb, len=0x1) 0xc
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x2c, len=0x2) 0x1462
+vfio_pci_read_config  (0000:00:14.0, @0x2e, len=0x2) 0x7c56
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_listener_region_del region_del 0xa0000 - 0xaffff
+vfio_listener_region_skip SKIPPING region_del 0xb0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_add 0xa0000 - 0xbffff
+vfio_listener_region_skip SKIPPING region_del 0xa0000 - 0xbffff
+vfio_listener_region_add_ram region_add [ram] 0xa0000 - 0xaffff [0x7326bc200000]
+vfio_listener_region_skip SKIPPING region_add 0xb0000 - 0xbffff
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x2, len=0x2) 0x790b
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x1) 0x61
+vfio_pci_read_config  (0000:00:14.0, @0x9, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xa, len=0x1) 0x5
+vfio_pci_read_config  (0000:00:14.0, @0xb, len=0x1) 0xc
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x2c, len=0x2) 0x1462
+vfio_pci_read_config  (0000:00:14.0, @0x2e, len=0x2) 0x7c56
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_pci_read_config  (0000:00:14.0, @0x10, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x14, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x18, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x1c, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x20, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x24, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x30, len=0x4) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x4, len=0x2) 0x103
+vfio_pci_read_config  (0000:00:14.0, @0x0, len=0x2) 0x1022
+vfio_pci_read_config  (0000:00:14.0, @0x2, len=0x2) 0x790b
+vfio_pci_read_config  (0000:00:14.0, @0x8, len=0x1) 0x61
+vfio_pci_read_config  (0000:00:14.0, @0x9, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0xa, len=0x1) 0x5
+vfio_pci_read_config  (0000:00:14.0, @0xb, len=0x1) 0xc
+vfio_pci_read_config  (0000:00:14.0, @0xe, len=0x1) 0x0
+vfio_pci_read_config  (0000:00:14.0, @0x2c, len=0x2) 0x1462
+vfio_pci_read_config  (0000:00:14.0, @0x2e, len=0x2) 0x7c56
+vfio_listener_region_skip SKIPPING region_del 0xfebc0000 - 0xfebdffff
