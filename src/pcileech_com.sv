@@ -53,6 +53,123 @@ module pcileech_com (
 `endif /* ENABLE_ETH */
     );
 
+    // DRP Addresses (Big Endian)
+    localparam    BAR0_LOW                <= 9'h0007; // 15:0
+    localparam    BAR0_HIGH               <= 9'h0008; // 15:0
+    localparam    BAR1_LOW                <= 9'h0009; // 15:0
+    localparam    BAR1_HIGH               <= 9'h000a; // 15:0
+    localparam    BAR2_LOW                <= 9'h000b; // 15:0
+    localparam    BAR2_HIGH               <= 9'h000c; // 15:0
+    localparam    BAR3_LOW                <= 9'h000d; // 15:0
+    localparam    BAR3_HIGH               <= 9'h000e; // 15:0
+    localparam    BAR4_LOW                <= 9'h000f; // 15:0
+    localparam    BAR4_HIGH               <= 9'h0010; // 15:0
+    localparam    BAR5_LOW                <= 9'h0011; // 15:0
+    localparam    BAR5_HIGH               <= 9'h0012; // 15:0
+    localparam    EXP_ROM_LOW             <= 9'h0013; // 15:0
+    localparam    EXP_ROM_HIGH            <= 9'h0014; // 15:0
+    localparam    CAP_PTR                 <= 9'h0015; // 7:0
+    localparam    CARDBUS_PTR_LOW            <=9'h0016; // 15:0
+    localparam    CARDBUS_PTR_HIGH            <=9'h0017; // 15:0
+    localparam    CLASS_CODE_LOW            <=9'0018; // 15:0
+    localparam    CLASS_CODE_HIGH            <=0'0019; // 7:0
+    localparam    INTX_IMPL                <= 9'h0019; // 8
+
+     // PCIe Capability Parameters
+    localparam    CPL_TIMEOUT_DISABLE_SUPP   <=9'h0019; // 9
+    localparam    CLP_TIMEOUT_RANGES_SUPP    <=9'h0019; // 13:10
+    localparam    DEV_CAP2_ARI_FOWARD_SUPP    <=9'h0019; // 14
+    localparam    DEV_CAP2_ATOMICOP_ROUTING_SUPP    <=9'h0019; // 15
+    localparam    DEV_CAP2_ATOMICOP32_COMPL_SUPP    <=9'h001a; // 0
+    localparam    DEV_CAP2_ATOMICOP64_COMPL_SUPP    <=9'h001a; // 1
+    localparam    DEV_CAP2_CAS128_COMPL_SUPP        <=9'h001a; // 2
+    localparam    DEV_CAP2_NO_RO_EN_PRPR_PASSING    <=9'h001a; // 3
+    localparam    DEV_CAP2_LTR_MECH_SUPP            <=9'h001a; // 4
+    localparam    DEV_CAP2_TPH__COMPL_SUPP          <=9'h001a; // 6:5
+    localparam    DEV_CAP2_EXT_FMT_FIELD_SUPP       <=9'h001a; // 7
+    localparam    DEV_CAP2_ENDEND_TLP_PREFIX_SUPP   <=9'h001a; // 8
+    localparam    DEV_CAP2_MAX_ENDEND_TLP_PREFIXES    <=9'h001a; // 10:9
+    localparam    ENDEND_TLP_PREFIX_FOWARD_SUPP        <=9'h001a; // 11
+    localparam    DEV_CAP_EN_SLOT_PWR_LIMIT_SCALE    <=9'h001a; // 12
+    localparam    DEV_CAP_EN_SLOT_PWR_LIMIT_VALUE    <=9'h001a; // 13
+    localparam    DEV_CAP_ENDPOINT_L0S_LATENCY        <=9'h001b; // 2:0
+    localparam    DEV_CAP_ENDPOINT_L1s_LATENCY        <=9'h001b; // 5:3
+    localparam    DEV_CAP_EXT_TAG_SUPP                <=9'h001b; // 6
+    localparam    DEV_CAP_FUNCTION_LVL_RST_CAPABLE    <=9'h001b; // 7
+    localparam    DEV_CAP_MAX_PAYLOAD_SUPP            <=9'h001b; // 10:8
+    localparam    DEV_CAP_PHANTOM_FUNCTIONS_SUPP      <=9'h001b; // 12:11
+    localparam    DEV_CAP_ROLE_BASED_ERROR            <=9'h001b; // 13
+   
+localparam DEV_CAP_RSVD_14_12         = 9'h001b;    // [14:12]
+localparam DEV_CAP_RSVD_17_16         = 9'h001c;    // [17:16]
+localparam DEV_CONTROL_AUX_POWER_SUPP = 9'h001c;    // [8]
+localparam DEV_CONTROL_EXT_TAG_DEFAULT = 9'h001c;    // [9]
+
+// Link Parameters
+localparam LINK_CAP_ASPM_SUPPORT      = 9'h023;    // [13:12]
+localparam LINK_CAP_L0S_EXIT_LATENCY  = 9'h024;    // [2:0]
+localparam LINK_CAP_L1_EXIT_LATENCY   = 9'h024;    // [5:3]
+localparam LINK_CAP_MAX_LINK_SPEED    = 9'h025;    // [3:0]
+localparam LINK_CAP_MAX_LINK_WIDTH    = 9'h025;    // [9:4]
+
+// MSI/MSI-X Parameters
+localparam MSI_BASE_PTR               = 9'h027;    // [7:0]
+localparam MSI_CAP_64_BIT_ADDR_CAPABLE= 9'h027;    // [8]
+localparam MSI_CAP_MULTIMSGCAP       = 9'h028;    // [2:0]
+localparam MSI_CAP_MULTIMSG_EXTENSION= 9'h028;    // [4:3]
+localparam MSI_CAP_ID                = 9'h028;    // [15:8]
+
+// Power Management Parameters
+localparam PM_BASE_PTR               = 9'h033;    // [7:0]
+localparam PM_CAP_AUXCURRENT        = 9'h034;    // [2:0]
+localparam PM_CAP_DSI               = 9'h034;    // [5]
+localparam PM_CAP_D1SUPPORT         = 9'h034;    // [3]
+localparam PM_CAP_D2SUPPORT         = 9'h034;    // [4]
+
+// PCIe Extended Capabilities
+localparam PCIE_CAP_CAPABILITY_ID    = 9'h031;    // [15:8]
+localparam PCIE_CAP_CAPABILITY_VER   = 9'h031;    // [3:0]
+localparam PCIE_CAP_DEVICE_PORT_TYPE = 9'h032;    // [7:4]
+localparam PCIE_CAP_SLOT_IMPLEMENTED = 9'h033;    // [3]
+
+// AER Capability Parameters
+localparam AER_CAP_ECRC_CHECK_CAPABLE = 9'h000;    // [0]
+localparam AER_CAP_ECRC_GEN_CAPABLE   = 9'h000;    // [1]
+localparam AER_CAP_ID                 = 9'h001;    // [15:0]
+localparam AER_CAP_VERSION            = 9'h001;    // [4:1]
+
+// DSN Capability Parameters
+localparam DSN_CAP_NEXTPTR           = 9'h01f;    // [11:0]
+localparam DSN_CAP_ON                = 9'h01f;    // [12]
+localparam DSN_CAP_VERSION           = 9'h020;    // [3:0]
+
+// Virtual Channel Parameters
+localparam VC_CAP_VERSION            = 9'h020;    // [3:0]
+localparam VC_CAP_REJECT_SNOOP_TRANS = 9'h020;    // [4]
+
+
+
+    // Initial Register Values (Little Endian)
+    reg    BAR0_LOW_VALUE <= 16'h0000 // 0:15 -> 00000000
+    reg    BAR0_HIGH_VALUE <=16'h0000 // 15:31 -> 00000000
+    reg    BAR1_LOW_VALUE <= 16'h0000
+    reg    BAR1_HIGH_VALUE <=16'h0000
+    reg    BAR2_LOW_VALUE <= 16'h0000
+    reg    BAR2_HIGH_VALUE <=16'h0000
+    reg    BAR3_LOW_VALUE <= 16'h0000
+    reg    BAR3_HIGH_VALUE <=16'h0000
+    reg    BAR4_LOW_VALUE <= 16'h0000
+    reg    BAR4_HIGH_VALUE <=16'h0000
+    reg    BAR5_LOW_VALUE <= 16'h0000
+    reg    BAR5_HIGH_VALUE <=16'h0000
+    reg    CARDBUS_LOW_VALUE <= 16'h0000
+    reg    CARDBUS_HIGH_VALUE <=16'h0000
+    reg    EXP_ROM_LOW_VALUE <= 16'h0000
+    reg    EXP_ROM_HIGH_VALUE <=16'h0000
+    reg    CLASS_CODE_LOW_VALUE <= 16'h0000
+    reg    CLASS_CODE_HIGH_VALUE <=16'h0000
+
+    
     // ----------------------------------------------------------------------------
     // COMMUNICATION CORE INITIAL ON-BOARD DEFAULT RX-DATA
     // Sometimes there is a need to perform actions - such as setting DRP-related
@@ -60,23 +177,20 @@ module pcileech_com (
     // "virtual" COM-core initial transmitted values below.
     // ----------------------------------------------------------------------------
     
-    bit [63:0] initial_rx [5] = '{
-            // Modify data below to set own actions - examples:
-            // - send some initial TLP on core startup.
-            // - set initial VID/PID if PCIe core has been modified.
-            // - write to DRP memory space to alter the core.
-            // replace / expand on dummy values below - for syntax of each 64-bit word
-            // please consult sources and also device_fpga.c in the LeechCore project.
-            64'h00000000_00000000,
-            64'h00000000_00000000,
-            64'h00000000_00000000,
-            64'h00000000_00000000,
+bit [63:0] initial_rx [5];  
 
-            // Bring the PCIe core online from initial hot-reset state. This is done by
-            // setting control bit in PCIleech FIFO CMD register. This should ideally be
-            // done after DRP&Config actions are completed - but before sending PCIe TLPs.
-            64'h00000003_80182377
-        };
+initial begin
+    // Set initial values to core parameters
+    initial_rx[0] = {BAR0_LOW_VALUE, 16'hFFFF, BAR0_LOW, DRP_CMD};
+    initial_rx[1] = {BAR0_HIGH_VALUE, 16'hFFFF, BAR0_HIGH, DRP_CMD};
+    initial_rx[2] = 64'h00000000_00000000;
+    initial_rx[3] = 64'h00000000_00000000;
+    initial_rx[4] = 64'h00000000_00000000;
+
+    // Bring the core online
+    initial_rx[5] = 64'h00000003_80182377
+end
+
         
     time tickcount64 = 0;
     always @ ( posedge clk )
