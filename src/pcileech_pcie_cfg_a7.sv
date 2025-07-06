@@ -95,10 +95,18 @@ module pcileech_pcie_cfg_a7(
     reg                 rwi_tlp_static_valid;
     reg                 rwi_tlp_static_2nd;
     reg                 rwi_tlp_static_has_data;
-    reg     [31:0]      rwi_count_cfgspace_status_cl;
+    reg     [31:0]      rwi_count_cfgspace_status_cl;    
     bit     [31:0]      base_address_register_reg;
     bit     [9:0]       next_cfg_task;
-   
+    
+        // create initilization done variable
+    reg                 init_done;
+
+    // Add registers for interrupt control specific to this device
+    reg [1:0] sample_count;
+    reg [7:0] random_counter;
+    reg irq_sample_valid;
+       
     // ------------------------------------------------------------------------
     // REGISTER FILE: READ-ONLY LAYOUT/SPECIFICATION
     // ------------------------------------------------------------------------
@@ -197,6 +205,11 @@ module pcileech_pcie_cfg_a7(
     
     task pcileech_pcie_cfg_a7_initialvalues;        // task is non automatic
         begin
+            init_done <= 0;
+            sample_count = 0;    // For 3-clock cycle alignment
+            random_counter = 8'h42;  // Initial seed
+            irq_sample_valid = 0
+            
             out_wren <= 1'b0;
             
             rwi_cfg_mgmt_rd_en <= 1'b0;
@@ -361,6 +374,7 @@ module pcileech_pcie_cfg_a7(
                         rw[in_cmd_address_bit+i_write] <= in_cmd_value[i_write];
 
             // STATUS REGISTER CLEAR
+            if (!init_done) begin
             if ( (rw[RWPOS_CFG_CFGSPACE_STATUS_CL_EN] | rw[RWPOS_CFG_CFGSPACE_COMMAND_EN]) & ~in_cmd_read & ~in_cmd_write & ~rw[RWPOS_CFG_RD_EN] & ~rw[RWPOS_CFG_WR_EN] & ~rwi_cfg_mgmt_rd_en & ~rwi_cfg_mgmt_wr_en )
                 if ( rwi_count_cfgspace_status_cl < rw[672+:32] )
                     rwi_count_cfgspace_status_cl <= rwi_count_cfgspace_status_cl + 1;
@@ -438,8 +452,9 @@ module pcileech_pcie_cfg_a7(
         if(next_cfg_task < 9)
             next_cfg_task <= next_cfg_task + 1;
         else
-            next_cfg_task <= 0;
+            init_done <= 1;
     end
+        end
                     
 
                // CONFIG SPACE READ/WRITE                        
@@ -467,40 +482,54 @@ module pcileech_pcie_cfg_a7(
                 rwi_cfgrd_valid     <= 1'b0;
             end
 
-            tickcount64_25_prev <= tickcount64[25];
-            if (tickcount64_25_prev == 0 && tickcount64[25] == 1) begin
-                if (sec_counter >= 112) begin 
-                    sec_counter <= 0;
-                    int_state <= STATE_ASSERT_INT;
-                end else begin
-                    sec_counter <= sec_counter + 1;
-                end
-            end
+           // LFSR for pseudo-random timing
+                random_counter <= {random_counter[6:0], 
+                  random_counter[7] ^ random_counter[5] ^ 
+                  random_counter[4] ^ random_counter[3]};
 
-            case (int_state)
-                STATE_IDLE: begin
-                    cfg_int_assert <= 0;
-                    cfg_int_valid <= 0;
-                end
-                STATE_ASSERT_INT: begin
-                    if (cfg_int_valid == 0) begin
-                        cfg_int_assert <= 1;
-                        cfg_int_valid <= 1;
-                    end else if (ctx.cfg_interrupt_rdy) begin
-                        cfg_int_valid <= 0;
-                        int_state <= STATE_DEASSERT_INT;
-                    end
-                end
-                STATE_DEASSERT_INT: begin
-                    if (cfg_int_valid == 0) begin
-                        cfg_int_assert <= 0;
-                        cfg_int_valid <= 1;
-                    end else if (ctx.cfg_interrupt_rdy) begin
-                        cfg_int_valid <= 0;
-                        int_state <= STATE_IDLE;
-                    end
-                end
-            endcase
+// 3-clock cycle alignment
+if (sample_count == 2) begin
+    sample_count <= 0;
+    irq_sample_valid <= 1;
+    
+    // Only consider generating interrupt during sample phase
+    // and when random pattern indicates
+    if (random_counter[2:0] == 3'b111 && int_state == STATE_IDLE) begin
+        int_state <= STATE_ASSERT_INT;
+    end
+end else begin
+    sample_count <= sample_count + 1;
+    irq_sample_valid <= 0;
+end
+
+// interrupt state machine to only act during valid sample phase
+case (int_state)
+    STATE_IDLE: begin
+        cfg_int_assert <= 0;
+        cfg_int_valid <= 0;
+    end
+    
+    STATE_ASSERT_INT: begin
+        if (irq_sample_valid && cfg_int_valid == 0) begin
+            cfg_int_assert <= 1;
+            cfg_int_valid <= 1;
+        end else if (ctx.cfg_interrupt_rdy) begin
+            cfg_int_valid <= 0;
+            int_state <= STATE_DEASSERT_INT;
+        end
+    end
+    
+    STATE_DEASSERT_INT: begin
+        if (irq_sample_valid && cfg_int_valid == 0) begin
+            cfg_int_assert <= 0;
+            cfg_int_valid <= 1;
+        end else if (ctx.cfg_interrupt_rdy) begin
+            cfg_int_valid <= 0;
+            int_state <= STATE_IDLE;
+        end
+    end
+endcase
+
 end
 
 endmodule
