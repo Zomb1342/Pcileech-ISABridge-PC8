@@ -22,7 +22,7 @@ Display Message
 Recommended Resolution
 None. This problem code should only appear when the DEVMGR_SHOW_NONPRESENT_DEVICES environment variable is set.
 
-***Its possbile that either this device does not generate interrupts or is not capable of generating interrupts in a modern pc.***
+***Its possbile that either this device does not generate interrupts or generates interrupts on a lower level that dvrscan doesn't detect***
 
 **More Info:**
 
