@@ -1,6 +1,6 @@
 # PCILeech-ISABridge-PC8
 
-Example firmware demonstrating how to use **Shadow Configuration**, **Write Mask**, and **RW1C masks** together to accurately mimic the configuration space of a PCI/PCIe device using PCILeech.
+Example firmware demonstrating how to use **Shadow Configuration**, **Write Mask**, and **RW1C masks** together to accurately mimic the configuration space of a PCI/PCIe device using PCILeech on a CaptainDMA 75T FPGA, if you want to build this for other FPGA PCIe Cards you will need to get the constraints and build it appropriately.
 
 This device **cannot be replicated using the PCIe core alone**, because its configuration registers are **not part of a capability list** and must be implemented manually.
 
