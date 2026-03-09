@@ -1,18 +1,56 @@
-# Pcileech-ISABridge-PC8
+# PCILeech-ISABridge-PC8
 
-Good example of how to use Shadow Configuration, Writemask, and RW1C Masks together to correctly mimick the configuration space of PCI/PCIe devices using PCIleech. You cannot mimick this device by using the core alone as its configuration registers are not a part of a capability list. 
+Example firmware demonstrating how to use **Shadow Configuration**, **Write Mask**, and **RW1C masks** together to accurately mimic the configuration space of a PCI/PCIe device using PCILeech.
 
-# **WARNING**
-- *CHANGE SUBSYSTEM VENDOR ID & SUBSYSTEM ID TO MATCH THAT OF ONE OF YOUR ON-BOARD PCIe DEVICES SO THAT IT LOOKS LIKE ITS PART OF YOU'RE SYSTEM OR CHANGE IT TO MATCH THE ID'S OF THE PC8 ISA BRIDGE. WHICHEVER YOU THINK IS BEST AS THE B:D:F WOULD GIVE AWAY THE FACT THE DEVICE IS NOT AN ON-BOARD PCIe DEVICE IF PROBED OR REVIEWED MANUALLY*
+This device **cannot be replicated using the PCIe core alone**, because its configuration registers are **not part of a capability list** and must be implemented manually.
 
-# **Info:**
+---
 
-This firmware is based on a datasheet for a chip that was not used for pcie devices but in industrial motherboards and I/O devices. I have implmented PM and PCIe caps so that the device can function as a PCIe device. Datasheet has been provided with the configuration space registers defined.
+# Warning
 
-Driver Scan doesn't detect interrupts being generated, but neither does it complain about it. Interrupts may or may nor be working.
+- Change the **Subsystem Vendor ID** and **Subsystem Device ID** to match either:
+  - one of your **existing onboard PCIe devices**, or  
+  - the IDs used by the **PC8 ISA Bridge**.
+
+- Otherwise, the **Bus:Device:Function (B:D:F)** address may reveal that the device is not actually integrated into the motherboard if the system configuration is manually inspected.
+
+- No PCI/PCIe **capabilities** are currently implemented because a real ISA bridge would not normally expose them. In this state, the device **fails Driver Scan**.
+
+If **Power Management (PM)** and **PCIe capabilities** are implemented so the device behaves as a PCIe endpoint (as shown in the screenshot below), the device **passes Driver Scan**.
+
+Determining the appropriate configuration depends on your research goals.
+
+**Driver Scan results should not be considered authoritative.**
+
+---
+
+# Information
+
+This firmware is based on the datasheet of a chip originally designed for **industrial motherboards**, not PCIe devices.
+
+The referenced datasheet includes definitions for the configuration space registers used in this firmware.
+
+---
+
+### Interrupt Behavior
+
+Driver Scan does not detect interrupts being generated, but it also does not report an error related to interrupts.  
+Interrupt functionality **may or may not be working**.
+
+---
+
+### Resources
 
 - [Datasheet](PC87200.PDF)
 
-- ![Driver scan after manually setting command register](2.png)
+---
 
-- ![Speed Test](Screenshot%202025-06-10%20160117.png)
+### Screenshots
+
+Driver Scan after manually setting the command register:
+
+![Driver Scan](2.png)
+
+Speed test:
+
+![Speed Test](Screenshot%202025-06-10%20160117.png)
