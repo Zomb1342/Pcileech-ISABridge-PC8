@@ -1,6 +1,6 @@
 # Pcileech-ISABridge-PC8
 
-Good example of how to use Shadow Configuration, Writemask, and RW1C Masks together to correctly mimick the configuration space of PCI/PCIe devices using PCIleech. Cannot build this device with the core alone as its configuration registers are not a part of a capability list. 
+Good example of how to use Shadow Configuration, Writemask, and RW1C Masks together to correctly mimick the configuration space of PCI/PCIe devices using PCIleech. You cannot mimick this device by using the core alone as its configuration registers are not a part of a capability list. 
 
 # **WARNING**
 - *CHANGE SUBSYSTEM VENDOR ID & SUBSYSTEM ID TO MATCH THAT OF ONE OF YOUR ON-BOARD PCIe DEVICES SO THAT IT LOOKS LIKE ITS PART OF YOU'RE SYSTEM OR CHANGE IT TO MATCH THE ID'S OF THE PC8 ISA BRIDGE. WHICHEVER YOU THINK IS BEST AS THE B:D:F WOULD GIVE AWAY THE FACT THE DEVICE IS NOT AN ON-BOARD PCIe DEVICE IF PROBED OR REVIEWED MANUALLY*
