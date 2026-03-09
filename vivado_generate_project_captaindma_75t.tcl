@@ -1,5 +1,5 @@
 #
-# Vivado generated .tcl for creating the pcileech_enigma_x1 vivado project.
+# Vivado generated .tcl for creating the pcileech_cap75t_x1 vivado project.
 # Run from within "Vivado Tcl Shell" with command: source vivado_generate_project.tcl -notrace
 #
 
@@ -12,7 +12,7 @@ if { [info exists ::origin_dir_loc] } {
 }
 
 # Set the project name
-set _xil_proj_name_ "pcileech_enigma_x1"
+set _xil_proj_name_ "pcileech_cap75t_x1"
 
 # Use project name variable, if specified in the tcl shell
 if { [info exists ::user_project_name] } {
@@ -68,7 +68,7 @@ if { $::argc > 0 } {
 }
 
 # Set the directory path for the original project from where this script was exported
-set orig_proj_dir "[file normalize "$origin_dir/pcileech_75t484_x1"]"
+set orig_proj_dir "[file normalize "$origin_dir/pcileech_cap75t_x1"]"
 
 # Create project
 create_project ${_xil_proj_name_} ./${_xil_proj_name_} -part xc7a75tfgg484-2
@@ -116,7 +116,46 @@ set files [list \
  [file normalize "${origin_dir}/src/pcileech_pcie_tlp_a7.sv"]\
  [file normalize "${origin_dir}/src/pcileech_tlps128_bar_controller.sv"]\
  [file normalize "${origin_dir}/src/pcileech_tlps128_cfgspace_shadow.sv"]\
- [file normalize "${origin_dir}/src/pcileech_75t484_x1_top.sv"]\
+ [file normalize "${origin_dir}/src/pcileech_cap75t_x1_top.sv"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_axi_basic_rx.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_axi_basic_rx_null_gen.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_axi_basic_rx_pipeline.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_axi_basic_top.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_axi_basic_tx.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_axi_basic_tx_pipeline.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_axi_basic_tx_thrtl_ctl.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_core_top.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_gt_common.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_gt_rx_valid_filter_7x.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_gt_top.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_gt_wrapper.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_gtp_cpllpd_ovrd.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_gtp_pipe_drp.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_gtp_pipe_rate.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_gtp_pipe_reset.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_gtx_cpllpd_ovrd.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pcie_7x.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pcie_bram_7x.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pcie_bram_top_7x.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pcie_brams_7x.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pcie_pipe_lane.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pcie_pipe_misc.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pcie_pipe_pipeline.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pcie_top.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pcie2_top.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pipe_clock.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pipe_drp.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pipe_eq.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pipe_rate.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pipe_reset.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pipe_sync.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pipe_user.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_pipe_wrapper.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_qpll_drp.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_qpll_reset.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_qpll_wrapper.v"]\
+ [file normalize "${origin_dir}/pcie_7x/pcie_7x_0_rxeq_scan.v"]\
 ]
 set imported_files [import_files -fileset sources_1 $files]
 
@@ -164,14 +203,169 @@ set file "src/pcileech_tlps128_cfgspace_shadow.sv"
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "src/pcileech_75t484_x1_top.sv"
+set file "src/pcileech_cap75t_x1_top.sv"
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
+set file "pcie_7x/pcie_7x_0.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_axi_basic_rx.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_axi_basic_rx_null_gen.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_axi_basic_rx_pipeline.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_axi_basic_top.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_axi_basic_tx.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_axi_basic_tx_pipeline.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_axi_basic_tx_thrtl_ctl.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_core_top.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_gt_common.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_gt_rx_valid_filter_7x.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_gt_top.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_gt_wrapper.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_gtp_cpllpd_ovrd.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_gtp_pipe_drp.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_gtp_pipe_rate.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_gtp_pipe_reset.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_gtx_cpllpd_ovrd.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pcie_7x.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pcie_bram_7x.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pcie_bram_top_7x.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pcie_brams_7x.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pcie_pipe_lane.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pcie_pipe_misc.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pcie_pipe_pipeline.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pcie_top.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pcie2_top.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pipe_clock.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pipe_drp.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pipe_eq.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pipe_rate.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pipe_reset.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pipe_sync.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pipe_user.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_qpll_drp.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_pipe_wrapper.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_qpll_reset.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_qpll_wrapper.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
+
+set file "pcie_7x/pcie_7x_0_rxeq_scan.v"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Verilog" -objects $file_obj
 
 # Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
-set_property -name "top" -value "pcileech_75t484_x1_top" -objects $obj
+set_property -name "top" -value "pcileech_cap75t_x1_top" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
 
 
@@ -182,6 +376,7 @@ set files [list \
  [file normalize "${origin_dir}/ip/pcileech_bar_zero4k.coe" ]\
  [file normalize "${origin_dir}/ip/pcileech_cfgspace.coe" ]\
  [file normalize "${origin_dir}/ip/pcileech_cfgspace_writemask.coe" ]\
+ [file normalize "${origin_dir}/ip/pcileech_cfgspace_rw1c.coe" ]\
  [file normalize "${origin_dir}/ip/bram_pcie_cfgspace.xci" ]\
 ]
 set imported_files [import_files -fileset sources_1 $files]
@@ -214,6 +409,25 @@ set_property -name "registered_with_manager" -value "1" -objects $file_obj
 if { ![get_property "is_locked" $file_obj] } {
   set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
 }
+
+# Set 'sources_1' fileset object
+set obj [get_filesets sources_1]
+# Import local files from the original project
+set files [list \
+ [file normalize "${origin_dir}/ip/drom_pcie_cfgspace_rw1c.xci"]\
+]
+set imported_files [import_files -fileset sources_1 $files]
+# Set 'sources_1' fileset file properties for remote files
+# None
+# Set 'sources_1' fileset file properties for local files
+set file "drom_pcie_cfgspace_rw1c/drom_pcie_cfgspace_rw1c.xci"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "generate_files_for_reference" -value "0" -objects $file_obj
+set_property -name "registered_with_manager" -value "1" -objects $file_obj
+if { ![get_property "is_locked" $file_obj] } {
+  set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
+}
+
 
 
 # Set 'sources_1' fileset object
@@ -429,25 +643,6 @@ if { ![get_property "is_locked" $file_obj] } {
 set obj [get_filesets sources_1]
 # Import local files from the original project
 set files [list \
- [file normalize "${origin_dir}/ip/pcie_7x_0.xci"]\
-]
-set imported_files [import_files -fileset sources_1 $files]
-# Set 'sources_1' fileset file properties for remote files
-# None
-# Set 'sources_1' fileset file properties for local files
-set file "pcie_7x_0/pcie_7x_0.xci"
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "generate_files_for_reference" -value "0" -objects $file_obj
-set_property -name "registered_with_manager" -value "1" -objects $file_obj
-if { ![get_property "is_locked" $file_obj] } {
-  set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
-}
-
-
-# Set 'sources_1' fileset object
-set obj [get_filesets sources_1]
-# Import local files from the original project
-set files [list \
  [file normalize "${origin_dir}/ip/fifo_64_64.xci"]\
 ]
 set imported_files [import_files -fileset sources_1 $files]
@@ -461,6 +656,7 @@ set_property -name "registered_with_manager" -value "1" -objects $file_obj
 if { ![get_property "is_locked" $file_obj] } {
   set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
 }
+
 
 
 # Set 'sources_1' fileset object
@@ -565,9 +761,9 @@ if {[string equal [get_filesets -quiet constrs_1] ""]} {
 # Set 'constrs_1' fileset object
 set obj [get_filesets constrs_1]
 # Add/Import constrs file and set constrs file properties
-set file "[file normalize ${origin_dir}/src/pcileech_75t484_x1_captaindma_75t.xdc]"
+set file "[file normalize ${origin_dir}/src/pcileech_captain_75T.xdc]"
 set file_imported [import_files -fileset constrs_1 [list $file]]
-set file "src/pcileech_75t484_x1_captaindma_75t.xdc"
+set file "src/pcileech_captain_75T.xdc"
 set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
 set_property -name "file_type" -value "XDC" -objects $file_obj
 
@@ -586,7 +782,7 @@ set obj [get_filesets sim_1]
 
 # Set 'sim_1' fileset properties
 set obj [get_filesets sim_1]
-set_property -name "top" -value "pcileech_75t484_x1_top" -objects $obj
+set_property -name "top" -value "pcileech_cap75t_x1_top" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
 
 # Upgrade IP from the currently installed Vivado version
