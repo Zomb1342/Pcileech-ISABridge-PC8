@@ -47,10 +47,10 @@ Interrupt functionality **may or may not be working**.
 
 ### Screenshots
 
-Driver Scan after manually setting the command register:
+Driver Scan:
 
 ![Driver Scan](2.png)
 
-Speed test:
+Speed Test:
 
 ![Speed Test](Screenshot%202025-06-10%20160117.png)
