@@ -400,13 +400,14 @@ module pcileech_pcie_cfg_a7(
                         if ( in_cmd_mask[i_write] )
                             rw[in_cmd_address_bit+i_write] <= in_cmd_value[i_write];
 
-
+            if (!init_done)
             if ( (rw[RWPOS_CFG_CFGSPACE_STATUS_CL_EN] | rw[RWPOS_CFG_CFGSPACE_COMMAND_EN]) & ~in_cmd_read & ~in_cmd_write & ~rw[RWPOS_CFG_RD_EN] & ~rw[RWPOS_CFG_WR_EN] & ~rwi_cfg_mgmt_rd_en & ~rwi_cfg_mgmt_wr_en )
                 if ( rwi_count_cfgspace_status_cl < rw[672+:32] )
                     rwi_count_cfgspace_status_cl <= rwi_count_cfgspace_status_cl + 1;
                 else begin
                     rwi_count_cfgspace_status_cl <= 0;
-
+                    case (next_cfg_task)
+                        0:begin
                     rw[RWPOS_CFG_WR_EN] <= 1'b1;
                         rw[143:128] <= 16'h0107;                            // cfg_mgmt_di: command register [update to set individual command register bits]
                         rw[159:144] <= 16'h0280;                            // cfg_mgmt_di: status register 
@@ -417,8 +418,26 @@ module pcileech_pcie_cfg_a7(
                         rw[173]     <= rw[RWPOS_CFG_CFGSPACE_COMMAND_EN];   // cfg_mgmt_byte_en: command register
                         rw[174]     <= rw[RWPOS_CFG_CFGSPACE_STATUS_CL_EN]; // cfg_mgmt_byte_en: status register
                         rw[175]     <= rw[RWPOS_CFG_CFGSPACE_STATUS_CL_EN]; // cfg_mgmt_byte_en: status register
-
-                    end
+                        next_cfg_task = next_cfg_task + 1;
+                        end
+                        1:begin
+                        rw[RWPOS_CFG_WR_EN] <= 1'b1;
+                            rw[143:128] <= 16'h010a;                            // cfg_mgmt_di: int pin/int line
+                            rw[159:144] <= 16'h0000;                            // cfg_mgmt_di:  max lat / min gnt
+                        rw[169:160] <= 15;                                   // cfg_mgmt_dwaddr
+                        rw[170]     <= 1;                                   // cfg_mgmt_wr_readonly
+                        rw[171]     <= 0;                                   // cfg_mgmt_wr_rw1c_as_rw
+                            rw[172]     <= 1;   // int line
+                            rw[173]     <= 1;   // int pin
+                            rw[174]     <= 0; // cfg_mgmt_byte_en: status register
+                            rw[175]     <= 0; // cfg_mgmt_byte_en: status register 
+                            init_done <= 1;
+                        end
+                    endcase
+                end
+            
+        end
+                        
 
 
                 // CONFIG SPACE READ/WRITE
