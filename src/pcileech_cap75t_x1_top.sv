@@ -10,7 +10,7 @@
 `timescale 1ns / 1ps
 `include "pcileech_header.svh"
 
-module pcileech_75t484_x1_top #(
+module pcileech_cap75t_x1_top #(
     parameter       PARAM_DEVICE_ID = 9,
     parameter       PARAM_VERSION_NUMBER_MAJOR = 4,
     parameter       PARAM_VERSION_NUMBER_MINOR = 14,
